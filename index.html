@@ -7,701 +7,167 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1a2744;
-    --navy-deep: #0f1928;
-    --gold: #c9a84c;
-    --gold-light: #e8c96a;
-    --gold-pale: #f5e9c4;
-    --cream: #faf8f3;
-    --stone: #e8e4d8;
-    --text: #2c2c2c;
-    --text-muted: #6b6657;
-    --white: #ffffff;
-    --border: rgba(201,168,76,0.25);
-    --shadow: 0 4px 24px rgba(26,39,68,0.12);
-    --radius: 6px;
-  }
+:root{--navy:#1a2744;--navy-deep:#0f1928;--gold:#c9a84c;--gold-light:#e8c96a;--gold-pale:#f5e9c4;--cream:#faf8f3;--stone:#e8e4d8;--text:#2c2c2c;--text-muted:#6b6657;--shadow:0 4px 24px rgba(26,39,68,0.12);--radius:6px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--cream);color:var(--text);font-size:16px;line-height:1.7}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* READING BAR & SCROLL TOP */
+#reading-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-light));z-index:200;transition:width .1s linear}
+#scroll-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--navy);color:var(--gold-light);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(15,25,40,.35);opacity:0;transform:translateY(12px);transition:opacity .25s,transform .25s;z-index:150}
+#scroll-top.visible{opacity:1;transform:translateY(0)}
+#scroll-top:hover{background:var(--gold);color:var(--navy-deep)}
 
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background: var(--cream);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.7;
-  }
+/* HEADER */
+header{background:var(--navy-deep);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:68px}
+.logo-block{display:flex;flex-direction:column;justify-content:center;gap:2px}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:.7rem;font-weight:500;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;line-height:1}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--gold-light);letter-spacing:.02em;text-decoration:none;line-height:1.2}
+.logo span{color:rgba(255,255,255,.45);font-weight:300}
+nav{display:flex}
+nav a{font-family:'Source Serif 4',serif;font-size:.78rem;color:rgba(255,255,255,.6);text-decoration:none;padding:0 1rem;height:68px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.04em;text-transform:uppercase}
+nav a:hover,nav a.active{color:var(--gold-light);border-bottom-color:var(--gold)}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--navy-deep);
-    border-bottom: 2px solid var(--gold);
-    padding: 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-    height: 64px;
-  }
-  .logo-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1px;
-  }
-  .logo-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--gold);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--gold-light);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    line-height: 1.2;
-  }
-  .logo span { color: rgba(255,255,255,0.5); font-weight: 300; }
-  nav { display: flex; gap: 0; }
-  nav a {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.82rem;
-    font-weight: 400;
-    color: rgba(255,255,255,0.65);
-    text-decoration: none;
-    padding: 0 1.1rem;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  nav a:hover, nav a.active {
-    color: var(--gold-light);
-    border-bottom-color: var(--gold);
-  }
+/* HERO */
+.hero{background:var(--navy);color:white;padding:4rem 2rem 3.5rem;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:center}
+.hero-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;font-weight:400}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:500;line-height:1.15;margin-bottom:1.1rem;color:white}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.6);line-height:1.75;font-weight:300;font-style:italic}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem}
+.hero-tag{font-size:.7rem;padding:.25rem .7rem;border:1px solid rgba(201,168,76,.35);border-radius:100px;color:var(--gold-light);background:rgba(201,168,76,.07)}
+.hero-stats{display:flex;flex-direction:column;gap:1.1rem}
+.stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:var(--radius);padding:1.1rem 1.4rem;border-left:3px solid var(--gold)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:500;color:var(--gold-light);line-height:1;margin-bottom:.2rem}
+.stat-label{font-size:.72rem;color:rgba(255,255,255,.45);letter-spacing:.05em;text-transform:uppercase}
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--navy);
-    color: white;
-    padding: 5rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -40%;
-    right: -10%;
-    width: 60%;
-    height: 160%;
-    background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 4rem;
-    align-items: center;
-  }
-  .hero-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    font-weight: 400;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 500;
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-    color: white;
-  }
-  .hero-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.75;
-    max-width: 520px;
-    font-weight: 300;
-    font-style: italic;
-  }
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-  }
-  .hero-tag {
-    font-size: 0.72rem;
-    padding: 0.28rem 0.75rem;
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 100px;
-    color: var(--gold-light);
-    letter-spacing: 0.03em;
-    background: rgba(201,168,76,0.07);
-  }
-  .hero-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-  .stat-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(201,168,76,0.2);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    border-left: 3px solid var(--gold);
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 500;
-    color: var(--gold-light);
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .stat-label {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:2.5rem 2rem 5rem}
+.section-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.75rem;padding-bottom:.7rem;border-bottom:1px solid var(--stone)}
+.section-head h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:500;color:var(--navy)}
+.section-desc{font-size:.82rem;color:var(--text-muted);font-style:italic}
 
-  /* ── MAIN CONTENT ── */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 2rem 5rem;
-  }
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem;padding:.9rem 1.2rem;background:white;border-radius:var(--radius);border:1px solid var(--stone)}
+.legend-item{display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:var(--text-muted)}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 
-  /* ── SECTION HEADINGS ── */
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--stone);
-  }
-  .section-head h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: var(--navy);
-  }
-  .section-head .section-desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-style: italic;
-  }
+/* SEARCH */
+.search-wrap{margin-bottom:1.1rem;position:relative}
+.search-input{font-family:'Source Serif 4',serif;font-size:.88rem;width:100%;padding:.6rem 1rem .6rem 2.4rem;border:1px solid var(--stone);border-radius:var(--radius);background:white;color:var(--text);outline:none;transition:border-color .18s,box-shadow .18s}
+.search-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.14)}
+.search-icon{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--text-muted);pointer-events:none;font-size:13px}
+.search-count{font-size:.76rem;color:var(--text-muted);margin-top:.35rem;font-style:italic;min-height:1.2em}
+.highlight{background:#fff3b0;border-radius:2px;padding:0 2px}
 
-  /* ── FILTER TAGS ── */
-  .filter-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-  }
-  .filter-btn {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.78rem;
-    padding: 0.35rem 0.85rem;
-    border-radius: 100px;
-    border: 1px solid var(--stone);
-    background: white;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.18s;
-    letter-spacing: 0.02em;
-  }
-  .filter-btn:hover { border-color: var(--gold); color: var(--navy); }
-  .filter-btn.active {
-    background: var(--navy);
-    border-color: var(--navy);
-    color: white;
-  }
-  .filter-btn[data-theme="all"].active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--navy-deep);
-  }
+/* FILTERS */
+.filter-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.75rem}
+.filter-btn{font-family:'Source Serif 4',serif;font-size:.75rem;padding:.32rem .8rem;border-radius:100px;border:1px solid var(--stone);background:white;color:var(--text-muted);cursor:pointer;transition:all .18s}
+.filter-btn:hover{border-color:var(--gold);color:var(--navy)}
+.filter-btn.active{background:var(--navy);border-color:var(--navy);color:white}
+.filter-btn[data-theme="all"].active{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
 
-  /* ── TIMELINE ── */
-  .timeline {
-    display: grid;
-    grid-template-columns: 80px 1px 1fr;
-    gap: 0 0;
-    position: relative;
-  }
-  .tl-year {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--gold);
-    text-align: right;
-    padding-right: 1.5rem;
-    padding-top: 0.35rem;
-    line-height: 1.2;
-  }
-  .tl-line {
-    background: var(--stone);
-    position: relative;
-    margin: 0 auto;
-    width: 1px;
-  }
-  .tl-line::before {
-    content: '';
-    position: absolute;
-    top: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--cream);
-    box-shadow: 0 0 0 2px var(--gold);
-  }
-  .tl-content {
-    padding: 0 0 2.5rem 1.5rem;
-  }
-  .work-card {
-    background: white;
-    border-radius: var(--radius);
-    border: 1px solid var(--stone);
-    border-left: 4px solid var(--gold);
-    padding: 1.25rem 1.5rem;
-    cursor: pointer;
-    transition: all 0.22s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    position: relative;
-  }
-  .work-card:hover {
-    box-shadow: var(--shadow);
-    transform: translateY(-2px);
-    border-left-color: var(--navy);
-  }
-  .work-card[data-theme="gender"] { border-left-color: #b05a7a; }
-  .work-card[data-theme="islam"] { border-left-color: #2d7a6e; }
-  .work-card[data-theme="mega-events"] { border-left-color: #7a5230; }
-  .work-card[data-theme="politics"] { border-left-color: #3a5c8a; }
-  .work-card[data-theme="marketing"] { border-left-color: #6a6a2a; }
-  .work-card.hidden { display: none; }
+/* TIMELINE */
+.timeline{display:grid;grid-template-columns:72px 1px 1fr;position:relative}
+.tl-year{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--gold);text-align:right;padding-right:1.4rem;padding-top:.3rem;line-height:1.2}
+.tl-line{background:var(--stone);margin:0 auto;width:1px;position:relative}
+.tl-line::before{content:'';position:absolute;top:.5rem;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:var(--gold);border:2px solid var(--cream);box-shadow:0 0 0 2px var(--gold)}
+.tl-content{padding:0 0 2.25rem 1.4rem}
 
-  .work-type {
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.35rem;
-  }
-  .work-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.3;
-    margin-bottom: 0.4rem;
-  }
-  .work-venue {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 0.65rem;
-  }
-  .work-abstract {
-    font-size: 0.88rem;
-    color: var(--text);
-    line-height: 1.65;
-    display: none;
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--stone);
-  }
-  .work-card.expanded .work-abstract { display: block; }
-  .work-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin-top: 0.75rem;
-  }
-  .work-tag {
-    font-size: 0.68rem;
-    padding: 0.2rem 0.55rem;
-    border-radius: 100px;
-    background: var(--stone);
-    color: var(--text-muted);
-    letter-spacing: 0.02em;
-  }
-  .expand-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: 1px solid var(--stone);
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.18s;
-  }
-  .expand-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
-  .work-card.expanded .expand-btn { background: var(--navy); color: white; border-color: var(--navy); }
+/* CARD */
+.work-card{background:white;border-radius:var(--radius);border:1px solid var(--stone);border-left:4px solid var(--gold);cursor:pointer;transition:all .22s;box-shadow:0 2px 8px rgba(0,0,0,.04);position:relative;display:flex;flex-direction:row;align-items:stretch;overflow:hidden}
+.work-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.work-card[data-theme="gender"]{border-left-color:#b05a7a}
+.work-card[data-theme="islam"]{border-left-color:#2d7a6e}
+.work-card[data-theme="politics"]{border-left-color:#3a5c8a}
+.work-card[data-theme="marketing"]{border-left-color:#6a6a2a}
+.work-card.hidden{display:none}
+.card-body{flex:1;padding:1.2rem 1.4rem;min-width:0;position:relative}
 
-  /* SIGNIFICANCE BOX */
-  .significance {
-    background: var(--gold-pale);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 0.75rem 1rem;
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    font-style: italic;
-    color: #5a4a10;
-  }
-  .significance strong {
-    font-style: normal;
-    text-transform: uppercase;
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    display: block;
-    margin-bottom: 0.25rem;
-    color: #8a7020;
-  }
+/* ILLUSTRATION - right side */
+.pub-illustration{width:152px;min-width:152px;flex-shrink:0;position:relative;overflow:hidden;border-radius:0 calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0;pointer-events:none}
+.pub-illustration svg{width:100%;height:100%;display:block;position:absolute;top:0;left:0}
+.pub-year-overlay{position:absolute;bottom:.55rem;right:.5rem;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:rgba(255,255,255,.2);line-height:1;pointer-events:none}
+.pub-type-overlay{position:absolute;top:.55rem;left:0;right:0;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.42);pointer-events:none;padding:0 .45rem;text-align:center;line-height:1.5}
 
-  /* ── THEME LEGEND ── */
-  .legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem 1.25rem;
-    background: white;
-    border-radius: var(--radius);
-    border: 1px solid var(--stone);
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-  .legend-dot {
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+/* CARD CONTENT */
+.work-type{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.3rem}
+.read-time{display:inline-block;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);background:var(--stone);padding:.12rem .5rem;border-radius:100px;margin-left:.45rem;vertical-align:middle}
+.work-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);line-height:1.3;margin-bottom:.35rem}
+.work-venue{font-size:.8rem;color:var(--text-muted);font-style:italic;margin-bottom:.55rem}
+.work-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.6rem}
+.work-tag{font-size:.65rem;padding:.18rem .5rem;border-radius:100px;background:var(--stone);color:var(--text-muted)}
+.click-hint{font-size:.68rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-top:.55rem;display:flex;align-items:center;gap:.38rem;transition:color .2s}
+.click-hint::before{content:'';display:inline-block;width:13px;height:13px;border:1.5px solid var(--gold);border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 2v6M2 5l3 3 3-3' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/9px no-repeat;flex-shrink:0;transition:transform .2s}
+.work-card.expanded .click-hint::before{transform:rotate(180deg)}
+.work-card.expanded .click-hint{color:var(--text-muted)}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy-deep);
-    color: rgba(255,255,255,0.45);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.82rem;
-    border-top: 1px solid var(--gold);
-  }
-  footer a { color: var(--gold); text-decoration: none; }
+/* EXPAND BTN */
+.expand-btn{position:absolute;top:.75rem;right:.75rem;background:none;border:1px solid var(--stone);border-radius:50%;width:23px;height:23px;cursor:pointer;color:var(--text-muted);font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .18s;z-index:2}
+.expand-btn:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.work-card.expanded .expand-btn{background:var(--navy);color:white;border-color:var(--navy)}
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes slideDown {
-    from { opacity: 0; max-height: 0; transform: translateY(-6px); }
-    to { opacity: 1; max-height: 2000px; transform: translateY(0); }
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  @keyframes countUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .work-card { animation: fadeUp 0.4s ease both; }
-  .work-card:nth-child(1) { animation-delay: 0.05s; }
-  .work-card:nth-child(2) { animation-delay: 0.1s; }
-  .work-card:nth-child(3) { animation-delay: 0.15s; }
+/* ABSTRACT */
+.work-abstract{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease,opacity .4s ease,padding .3s ease,margin .3s ease;padding-top:0;margin-top:0;border-top:1px solid transparent;font-size:.86rem;color:var(--text);line-height:1.65}
+.work-card.expanded .work-abstract{max-height:3000px;opacity:1;padding-top:1rem;margin-top:.75rem;border-top-color:var(--stone)}
 
-  /* ── CLICK HINT ── */
-  .click-hint {
-    font-size: 0.72rem;
-    color: var(--gold);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-top: 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: opacity 0.2s;
-  }
-  .click-hint::before {
-    content: '';
-    display: inline-block;
-    width: 14px; height: 14px;
-    border: 1.5px solid var(--gold);
-    border-radius: 50%;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 2v6M2 5l3 3 3-3' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/10px no-repeat;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-  .work-card.expanded .click-hint::before {
-    transform: rotate(180deg);
-  }
-  .work-card.expanded .click-hint { color: var(--text-muted); }
+/* SIGNIFICANCE */
+.significance{background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:.7rem 1rem;margin-top:.75rem;font-size:.83rem;font-style:italic;color:#5a4a10}
+.significance strong{font-style:normal;text-transform:uppercase;font-size:.65rem;letter-spacing:.09em;display:block;margin-bottom:.22rem;color:#8a7020}
 
-  /* ── SMOOTH EXPAND PANEL ── */
-  .work-abstract {
-    font-size: 0.88rem;
-    color: var(--text);
-    line-height: 1.65;
-    display: none;
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--stone);
-  }
-  .work-card.expanded .work-abstract {
-    display: block;
-    animation: fadeUp 0.35s ease;
-  }
+/* CITE BTN */
+.cite-btn{display:inline-flex;align-items:center;gap:.38rem;font-family:'Source Serif 4',serif;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);background:white;border:1px solid var(--stone);border-radius:4px;padding:.32rem .7rem;cursor:pointer;transition:all .18s;margin-top:.9rem}
+.cite-btn:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.cite-btn.copied{background:#2d7a6e;color:white;border-color:#2d7a6e}
 
-  /* ── READING TIME BADGE ── */
-  .read-time {
-    display: inline-block;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    background: var(--stone);
-    padding: 0.15rem 0.55rem;
-    border-radius: 100px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-  }
+/* NO RESULTS */
+.no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--text-muted);font-style:italic;font-size:.92rem}
+.no-results.visible{display:block}
 
-  /* ── COPY CITATION BUTTON ── */
-  .cite-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--navy);
-    background: white;
-    border: 1px solid var(--stone);
-    border-radius: 4px;
-    padding: 0.35rem 0.75rem;
-    cursor: pointer;
-    transition: all 0.18s;
-    margin-top: 1rem;
-  }
-  .cite-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
-  .cite-btn.copied { background: #2d7a6e; color: white; border-color: #2d7a6e; }
-  .cite-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+/* FOOTER */
+footer{background:var(--navy-deep);border-top:1px solid var(--gold);padding:2rem 2rem 1.5rem;text-align:center}
+.footer-inner{display:flex;align-items:center;justify-content:center;gap:2.2rem;flex-wrap:wrap;margin-bottom:1rem}
+.footer-visit-num{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:500;color:var(--gold-light);line-height:1}
+.footer-visit-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:.22rem}
+.footer-divider{width:1px;height:40px;background:rgba(201,168,76,.22)}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.72)}
+.footer-inst{font-size:.76rem;color:rgba(255,255,255,.38);margin-top:.2rem}
+.footer-links{display:flex;gap:1.1rem}
+.footer-links a{color:var(--gold);text-decoration:none;font-size:.8rem;transition:opacity .15s}
+.footer-links a:hover{opacity:.72}
+.footer-copy{font-size:.65rem;color:rgba(255,255,255,.22);border-top:1px solid rgba(201,168,76,.12);padding-top:.75rem}
 
-  /* ── SEARCH BAR ── */
-  .search-wrap {
-    margin-bottom: 1.25rem;
-    position: relative;
-  }
-  .search-input {
-    font-family: 'Source Serif 4', serif;
-    font-size: 0.9rem;
-    width: 100%;
-    padding: 0.65rem 1rem 0.65rem 2.5rem;
-    border: 1px solid var(--stone);
-    border-radius: var(--radius);
-    background: white;
-    color: var(--text);
-    transition: border-color 0.18s, box-shadow 0.18s;
-    outline: none;
-  }
-  .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
-  .search-icon {
-    position: absolute;
-    left: 0.8rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    pointer-events: none;
-    font-size: 14px;
-  }
-  .search-count {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin-top: 0.4rem;
-    font-style: italic;
-    min-height: 1.2em;
-  }
-  .highlight { background: #fff3b0; border-radius: 2px; padding: 0 2px; }
-
-  /* ── VISITOR COUNTER ── */
-  .visitor-stat {
-    animation: countUp 0.6s ease 0.3s both;
-  }
-
-  /* ── READING PROGRESS BAR ── */
-  #reading-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    z-index: 200;
-    transition: width 0.1s linear;
-  }
-
-  /* ── SCROLL TO TOP ── */
-  #scroll-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 44px; height: 44px;
-    background: var(--navy);
-    color: var(--gold-light);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    box-shadow: 0 4px 16px rgba(15,25,40,0.35);
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.25s, transform 0.25s;
-    z-index: 150;
-  }
-  #scroll-top.visible { opacity: 1; transform: translateY(0); }
-  #scroll-top:hover { background: var(--gold); color: var(--navy-deep); }
-
-  /* ── NO-RESULTS MESSAGE ── */
-  .no-results {
-    display: none;
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--text-muted);
-    font-style: italic;
-    font-size: 0.95rem;
-  }
-  /* ── PUBLICATION ILLUSTRATIONS ── */
-  .pub-illustration {
-    width: 100%;
-    height: 140px;
-    border-radius: var(--radius) var(--radius) 0 0;
-    margin: -1.25rem -1.5rem 1rem -1.5rem;
-    width: calc(100% + 3rem);
-    overflow: hidden;
-    position: relative;
-    background: var(--navy);
-  }
-  .pub-illustration svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .pub-illustration .pub-year-overlay {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.85rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.12);
-    line-height: 1;
-    pointer-events: none;
-    letter-spacing: -0.02em;
-  }
-  .pub-illustration .pub-type-overlay {
-    position: absolute;
-    bottom: 0.6rem;
-    left: 0.85rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    pointer-events: none;
-  }
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes countUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.work-card{animation:fadeUp .4s ease both}
 </style>
 </head>
 <body>
-
-<!-- Reading progress bar -->
 <div id="reading-bar"></div>
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8593;</button>
 
-<!-- Scroll to top -->
-<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
-
-<!-- HEADER -->
 <header>
   <div class="header-inner">
     <div class="logo-block">
       <div class="logo-name">Dr Mahfoud Amara</div>
-      <a class="logo" href="#">Sport in Islam and Muslim Communities <span>· Project</span></a>
+      <a class="logo" href="#">Sport in Islam and Muslim Communities <span>&middot; Project</span></a>
     </div>
     <nav>
-      <a href="#timeline" id="nav-timeline" class="active">Timeline</a>
-      <a href="#timeline" onclick="filterWorks('all', null); document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); document.querySelector('[data-theme=all]').classList.add('active'); return false;">All Works</a>
-      
-      <a href="/cdn-cgi/l/email-protection#c7aae9a6aaa6b5a687b6b2e9a2a3b2e9b6a6">Contact</a>
+      <a href="#timeline" class="active">Timeline</a>
+      <a href="#timeline" onclick="filterWorks('all',null);return false;">All Works</a>
+      <a href="/cdn-cgi/l/email-protection#7e13501f131f0c1f3e0f0b501b1a0b500f1f">Contact</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-label">Associate Professor · Qatar University · College of Sport Sciences</div>
+    <div>
+      <div class="hero-label">Associate Professor &middot; Qatar University &middot; College of Sport Sciences</div>
       <h1>Sport in Islam and Muslim Communities Project</h1>
-      <p class="hero-sub">
-        A chronological record of scholarly work exploring sport as a lens for understanding 
-        power, identity, religion, and postcolonial modernity — from Muslim women at the Beijing 
-        Olympics to Islam, football and faith at the FIFA 2022 World Cup in Qatar.
-      </p>
+      <p class="hero-sub">A chronological record of scholarly work exploring sport as a lens for understanding power, identity, religion, and postcolonial modernity &mdash; from Muslim women at the Beijing Olympics to Islam, football and faith at the FIFA 2022 World Cup in Qatar.</p>
       <div class="hero-tags">
         <span class="hero-tag">Sport Management</span>
         <span class="hero-tag">Sport Diplomacy</span>
@@ -713,763 +179,635 @@
       </div>
     </div>
     <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-num">20+</div>
-        <div class="stat-label">Years of Research (2003–2022)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Major Languages (EN · AR · FR)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Books (author / co-editor)</div>
-      </div>
-      <div class="stat-card visitor-stat">
-        <div class="stat-num" id="visitor-count">—</div>
-        <div class="stat-label">Page Visits (this browser)</div>
-      </div>
+      <div class="stat-card"><div class="stat-num">20+</div><div class="stat-label">Years of Research (2003&ndash;2022)</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Major Languages (EN &middot; AR &middot; FR)</div></div>
+      <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Publications in this portfolio</div></div>
     </div>
   </div>
 </section>
 
-<!-- MAIN -->
 <main id="timeline">
-
   <div class="section-head">
     <h2>Chronological Timeline of Works</h2>
-    <span class="section-desc">Click any work to expand · Filter by research theme below</span>
+    <span class="section-desc">Click any card to read the summary &amp; key arguments &middot; Filter by theme below</span>
   </div>
-
-  <!-- LEGEND -->
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#b05a7a"></div> Gender &amp; Identity</div>
     <div class="legend-item"><div class="legend-dot" style="background:#2d7a6e"></div> Islam &amp; Sport</div>
     <div class="legend-item"><div class="legend-dot" style="background:#3a5c8a"></div> Politics &amp; Nation-Building</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#6a6a2a"></div> Marketing &amp; Commerce</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#6a6a2a"></div> Sport Marketing</div>
   </div>
-
-  <!-- SEARCH -->
   <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input class="search-input" type="text" id="search-input" placeholder="Search by title, keyword, theme, year…" oninput="searchWorks(this.value)">
+    <span class="search-icon">&#128269;</span>
+    <input class="search-input" type="text" id="search-input" placeholder="Search by title, keyword, theme, year&hellip;" oninput="searchWorks(this.value)">
     <div class="search-count" id="search-count"></div>
   </div>
-
-  <!-- FILTERS -->
   <div class="filter-row">
-    <button class="filter-btn active" data-theme="all" onclick="filterWorks('all', this)">All Works</button>
-    <button class="filter-btn" data-theme="gender" onclick="filterWorks('gender', this)">Gender &amp; Identity</button>
-    <button class="filter-btn" data-theme="islam" onclick="filterWorks('islam', this)">Islam &amp; Sport</button>
-    <button class="filter-btn" data-theme="politics" onclick="filterWorks('politics', this)">Politics &amp; Nation-Building</button>
-    <button class="filter-btn" data-theme="marketing" onclick="filterWorks('marketing', this)">Sport Marketing</button>
+    <button class="filter-btn active" data-theme="all" onclick="filterWorks('all',this)">All Works</button>
+    <button class="filter-btn" data-theme="gender" onclick="filterWorks('gender',this)">Gender &amp; Identity</button>
+    <button class="filter-btn" data-theme="islam" onclick="filterWorks('islam',this)">Islam &amp; Sport</button>
+    <button class="filter-btn" data-theme="politics" onclick="filterWorks('politics',this)">Politics &amp; Nation-Building</button>
+    <button class="filter-btn" data-theme="marketing" onclick="filterWorks('marketing',this)">Sport Marketing</button>
   </div>
-
-  <!-- TIMELINE ITEMS -->
   <div class="timeline" id="works-timeline">
 
-    <!-- 2004 -->
     <div class="tl-year">2004</div>
     <div class="tl-line"></div>
     <div class="tl-content">
       <div class="work-card" data-theme="politics" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: football field lines + Algerian crescent motif -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a2744 0%,#2d4a1e 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- pitch lines -->
-            <rect x="60" y="20" width="300" height="100" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-            <line x1="210" y1="20" x2="210" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <circle cx="210" cy="70" r="30" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <rect x="60" y="45" width="45" height="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <rect x="315" y="45" width="45" height="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <!-- football -->
-            <circle cx="210" cy="70" r="12" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-            <path d="M204 62 l6-4 6 4 2 7-4 5h-8l-4-5z" fill="rgba(30,50,30,0.6)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
-            <!-- Algerian crescent -->
-            <path d="M340 35 a20 20 0 1 1 0 40 a15 15 0 1 0 0-40z" fill="rgba(201,168,76,0.35)" stroke="rgba(201,168,76,0.6)" stroke-width="1"/>
-            <polygon points="367,52 369,58 375,58 370,62 372,68 367,64 362,68 364,62 359,58 365,58" fill="rgba(201,168,76,0.5)"/>
-          </svg>
-          <div class="pub-year-overlay">2004</div>
-          <div class="pub-type-overlay">Soccer &amp; Society · Routledge</div>
-        </div>
-        <div class="work-type">Journal Article · co-authored with Ian P. Henry</div>
-        <div class="work-title">Between Globalization and Local 'Modernity': The Diffusion and Modernization of Football in Algeria</div>
-        <div class="work-venue"><em>Soccer &amp; Society</em>, Vol. 5, No. 1 (2004), pp. 1–26 · Routledge / Taylor &amp; Francis</div>
-        <div class="work-tags">
-          <span class="work-tag">#Algeria</span><span class="work-tag">#football</span>
-          <span class="work-tag">#political-Islam</span><span class="work-tag">#FLN</span>
-          <span class="work-tag">#one-party-state</span><span class="work-tag">#multiparty-transition</span>
-          <span class="work-tag">#postcolonialism</span><span class="work-tag">#nation-building</span>
-        </div>
-        <div class="work-abstract">
-          <p>Co-authored with Professor Ian P. Henry (Loughborough University), this article traces the diffusion and transformation of football in Algeria from the colonial period through to the post-socialist market economy era — examining how football's meaning and function shifted at each political conjuncture. The paper's central analytical contribution is a periodisation framework (later reproduced as Table 23.1 in the Houlihan <em>Sport and Society</em> textbook) mapping the changing role of sport across five phases of Algerian history:</p>
-          <p><strong>1926–57 (Colonialism):</strong> Sport initially organised around nationalist and European groups; football progressively appropriated by the nationalist movement as an instrument of anti-colonial subversion and political expression.</p>
-          <p><strong>1954–62 (Revolution):</strong> The FLN football team (1958) used the sport to internationalise the Algerian cause for independence — one of the most historically significant uses of sport diplomacy in the Global South.</p>
-          <p><strong>1962–88 (FLN single-party state):</strong> Football deployed as a tool of nation-state building, socialist legitimation, and pan-African solidarity. Era of enforced amateurism.</p>
-          <p><strong>1988–92 (Economic crisis and transition):</strong> Football stadiums become arenas of political agitation, social protest, and rejection of inequalities — coinciding with Algeria's opening toward multipartyism and, critically, the rise of political Islam (the FIS and the broader Islamist movement). The paper examines how sport became a contested terrain between secular state nationalism and political Islam during this turbulent transition period.</p>
-          <p><strong>From 1992 (Market economy):</strong> Commercial sport emerges in a locally specific Algerian form, shaped by the legacy of the Black Decade, globalisation pressures, and ongoing ideological tensions.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            This is the foundational empirical paper of the research programme — the work that established the author's comparative framework for understanding sport in postcolonial, Muslim-majority societies navigating between global sporting norms and local political and religious identities. Its periodisation table has been reproduced and cited across multiple subsequent works and textbooks. It is one of the earliest academic analyses to situate political Islam directly within the sociology of sport, treating the transition from one-party to multiparty state as a key variable in understanding football's contested meanings in North Africa.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Journal Article &middot; co-authored with Ian P. Henry</div>
+          <div class="work-title">Between Globalization and Local &lsquo;Modernity&rsquo;: The Diffusion and Modernization of Football in Algeria</div>
+          <div class="work-venue"><em>Soccer &amp; Society</em>, Vol. 5, No. 1 (2004), pp. 1&ndash;26 &middot; Routledge / Taylor &amp; Francis</div>
+          <div class="work-tags"><span class="work-tag">#Algeria</span><span class="work-tag">#football</span><span class="work-tag">#political-Islam</span><span class="work-tag">#FLN</span><span class="work-tag">#one-party-state</span><span class="work-tag">#multiparty-transition</span><span class="work-tag">#postcolonialism</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>Co-authored with Professor Ian P. Henry (Loughborough University), this article traces the diffusion and transformation of football in Algeria from the colonial period through to the post-socialist market economy era &mdash; examining how football&rsquo;s meaning and function shifted at each political conjuncture. The paper&rsquo;s central analytical contribution is a five-phase periodisation framework mapping the changing role of sport in Algerian society:</p>
+<p><strong>1926&ndash;57 (Colonialism):</strong> Football progressively appropriated by the nationalist movement as an instrument of anti-colonial subversion and political expression.</p>
+<p><strong>1954&ndash;62 (Revolution):</strong> The FLN football team (1958) internationalised the Algerian cause for independence &mdash; one of the most historically significant deployments of sport diplomacy in the Global South.</p>
+<p><strong>1962&ndash;88 (FLN single-party state):</strong> Football deployed as a tool of nation-state building, socialist legitimation, and pan-African solidarity under official amateurism.</p>
+<p><strong>1988&ndash;92 (Transition):</strong> Football stadiums become arenas of political agitation and social protest coinciding with Algeria&rsquo;s opening toward multipartyism and the rise of political Islam (FIS). The paper examines how sport became a contested terrain between secular state nationalism and Islamist movements.</p>
+<p><strong>From 1992 (Market economy):</strong> Commercial sport in a locally specific Algerian form, shaped by the legacy of the Black Decade and globalisation pressures.</p>
+            <div class="significance"><strong>Why it matters</strong>This is the foundational empirical paper of the research programme &mdash; establishing the comparative framework for understanding sport in postcolonial, Muslim-majority societies. Its periodisation table has been reproduced and cited across multiple subsequent works. One of the earliest analyses to situate political Islam directly within the sociology of sport.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0d1f0d 0%,#1a3a1a 50%,#2d1a0d 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <rect x="0" y="0" width="152" height="95" fill="rgba(0,0,0,.35)"/>
+  <circle cx="18" cy="14" r="1" fill="rgba(255,255,255,.55)"/>
+  <circle cx="48" cy="8" r=".8" fill="rgba(255,255,255,.4)"/>
+  <circle cx="75" cy="18" r="1" fill="rgba(255,255,255,.5)"/>
+  <circle cx="108" cy="10" r=".8" fill="rgba(255,255,255,.4)"/>
+  <path d="M112 10 a18 18 0 1 1 0 36 a13 13 0 1 0 0-36z" fill="rgba(0,150,0,.5)" stroke="rgba(0,200,0,.7)" stroke-width="1.2"/>
+  <polygon points="130,24 132,30 138,30 133,33 135,40 130,36 125,40 127,33 122,30 128,30" fill="rgba(0,200,0,.6)" transform="scale(.65) translate(72,8)"/>
+  <rect x="5" y="93" width="142" height="127" fill="rgba(30,80,30,.65)"/>
+  <rect x="5" y="93" width="142" height="127" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+  <line x1="76" y1="93" x2="76" y2="220" stroke="rgba(255,255,255,.12)" stroke-width=".8"/>
+  <circle cx="76" cy="156" r="26" fill="none" stroke="rgba(255,255,255,.12)" stroke-width=".8"/>
+  <ellipse cx="28" cy="170" rx="9" ry="6" fill="rgba(255,255,255,.1)"/>
+  <ellipse cx="55" cy="166" rx="9" ry="6" fill="rgba(255,255,255,.1)"/>
+  <ellipse cx="100" cy="168" rx="9" ry="6" fill="rgba(255,255,255,.1)"/>
+  <ellipse cx="128" cy="164" rx="9" ry="6" fill="rgba(255,255,255,.1)"/>
+  <circle cx="76" cy="156" r="9" fill="rgba(255,255,255,.82)" stroke="rgba(0,0,0,.2)" stroke-width=".5"/>
+  <path d="M72 151 l4-3 4 3 1.5 5-3 4h-5l-3-4z" fill="rgba(30,30,30,.5)"/>
+  <rect x="57" y="184" width="38" height="10" rx="2" fill="rgba(0,100,0,.45)" stroke="rgba(255,255,255,.15)" stroke-width=".5"/>
+  <text x="76" y="192" text-anchor="middle" font-size="5" fill="rgba(255,255,255,.55)" font-family="serif">1988&#x2013;1992</text>
+</svg>
+          <div class="pub-year-overlay">2004</div>
         </div>
       </div>
     </div>
 
-    <!-- 2007 -->
     <div class="tl-year">2007</div>
     <div class="tl-line"></div>
     <div class="tl-content">
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: open book, crescent, globe motif -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#0f2030 0%,#1a3a2a 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- open book -->
-            <path d="M130 30 L130 110 Q170 100 210 110 Q250 100 290 110 L290 30 Q250 40 210 30 Q170 40 130 30z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-            <line x1="210" y1="30" x2="210" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-            <!-- text lines on pages -->
-            <line x1="145" y1="50" x2="200" y2="52" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <line x1="145" y1="62" x2="200" y2="64" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="145" y1="74" x2="195" y2="76" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="145" y1="86" x2="200" y2="88" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="220" y1="50" x2="275" y2="52" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <line x1="220" y1="62" x2="275" y2="64" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="220" y1="74" x2="270" y2="76" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <line x1="220" y1="86" x2="275" y2="88" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <!-- crescent and star -->
-            <path d="M350 40 a22 22 0 1 1 0 44 a17 17 0 1 0 0-44z" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="1.5"/>
-            <polygon points="362,58 364,65 371,65 365,69 368,76 362,72 356,76 359,69 353,65 360,65" fill="rgba(201,168,76,0.55)"/>
-            <!-- globe hint -->
-            <circle cx="70" cy="70" r="30" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-            <ellipse cx="70" cy="70" rx="12" ry="30" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <line x1="40" y1="70" x2="100" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          </svg>
-          <div class="pub-year-overlay">2007</div>
-          <div class="pub-type-overlay">Sage · Sport and Society Textbook</div>
-        </div>
-        <div class="work-venue">In Houlihan (ed.), <em>Sport and Society: A Student Introduction</em> (2nd ed.), Sage · pp. 532–552</div>
-        <div class="work-type">Book Chapter</div>
-        <div class="work-title">An Introduction to the Study of Sport in the Muslim World</div>
-        <div class="work-venue">In Houlihan (ed.), <em>Sport and Society: A Student Introduction</em> (2nd ed.), Sage &middot; pp. 532&ndash;552</div>
-        <div class="work-tags">
-          <span class="work-tag">#Islam</span><span class="work-tag">#Muslim-world</span>
-          <span class="work-tag">#comparative</span><span class="work-tag">#Shari'a</span><span class="work-tag">#Ijtihad</span>
-        </div>
-        <div class="work-abstract">
-          <p>This foundational chapter distinguishes between two types of inquiry: (a) <em>sport in Islam</em> — examining modern sport through the lens of Islamic jurisprudence and the Qur'an/Sunnah; and (b) <em>sport in Muslim societies</em> — a sociological and postcolonial examination of sport across heterogeneous Muslim nation-states. The chapter provides non-Muslim readers with an accessible entry point to Islamic ontology (Tawhid), sources of jurisprudence, and the five pillars, before addressing how Muslim scholars debate sport's permissibility. It surveys the diversity of Muslim states from revolutionary-modernist (Tunisia, Algeria, Turkey) to conservative theocratic (Iran, Afghanistan) to constitutional monarchies (Qatar, Saudi Arabia).</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            Published in one of the most widely adopted sport studies textbooks, this chapter has introduced thousands of students globally to sport in Muslim contexts. It remains a standard course reading in sport sociology and management programmes worldwide.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Book Chapter &middot; Houlihan (ed.), Sage</div>
+          <div class="work-title">An Introduction to the Study of Sport in the Muslim World</div>
+          <div class="work-venue">In Houlihan (ed.), <em>Sport and Society: A Student Introduction</em> (2nd ed.), Sage &middot; pp. 532&ndash;552</div>
+          <div class="work-tags"><span class="work-tag">#Islam</span><span class="work-tag">#Muslim-world</span><span class="work-tag">#comparative</span><span class="work-tag">#Shari'a</span><span class="work-tag">#Ijtihad</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>This foundational chapter distinguishes between two types of inquiry: (a) <em>sport in Islam</em> &mdash; examining modern sport through the lens of Islamic jurisprudence and the Qur&rsquo;an/Sunnah; and (b) <em>sport in Muslim societies</em> &mdash; a sociological and postcolonial examination of sport across heterogeneous Muslim nation-states.</p>
+<p><strong>Key argument 1 &mdash; Ontological distinction:</strong> Islamic legal judgments on sport depend on purpose, individual and societal benefit, type of sporting activity, and cultural setting. In Islam, everything is permitted except what is explicitly forbidden by an undisputed text &mdash; creating a wide space for ijtihad (independent reasoning).</p>
+<p><strong>Key argument 2 &mdash; Heterogeneity of Muslim states:</strong> The chapter maps Muslim countries from revolutionary-modernist (Tunisia, Algeria, Turkey) to conservative-theocratic (Iran, Afghanistan) to constitutional monarchies (Qatar, Saudi Arabia), arguing against any monolithic reading of &ldquo;Islam and sport&rdquo;.</p>
+<p><strong>Key argument 3 &mdash; Sport in Islam in the West:</strong> Muslim communities in Europe face demands to reconcile Islamic exigencies (fasting, dress code, women-only facilities) with secular Western sport structures &mdash; raising questions of citizenship, integration, and minority jurisprudence (fiqh al-aqalliyyat).</p>
+            <div class="significance"><strong>Why it matters</strong>Published in one of the most widely adopted sport studies textbooks globally, this chapter has introduced thousands of students to sport in Muslim contexts. A standard course reading in sport sociology and management programmes worldwide.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0a1520 0%,#1a2a35 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <circle cx="76" cy="30" r="24" fill="rgba(20,60,90,.55)" stroke="rgba(100,180,255,.35)" stroke-width="1"/>
+  <ellipse cx="76" cy="30" rx="9" ry="24" fill="none" stroke="rgba(100,180,255,.18)" stroke-width=".8"/>
+  <line x1="52" y1="30" x2="100" y2="30" stroke="rgba(100,180,255,.18)" stroke-width=".8"/>
+  <path d="M84 16 a10 10 0 1 1 0 20 a8 8 0 1 0 0-20z" fill="rgba(201,168,76,.65)"/>
+  <path d="M25 65 L25 175 Q55 163 76 175 Q98 163 128 175 L128 65 Q98 77 76 65 Q55 77 25 65z" fill="rgba(245,235,200,.1)" stroke="rgba(201,168,76,.35)" stroke-width="1"/>
+  <line x1="76" y1="65" x2="76" y2="175" stroke="rgba(201,168,76,.25)" stroke-width="1"/>
+  <line x1="35" y1="85" x2="70" y2="85" stroke="rgba(201,168,76,.3)" stroke-width=".8"/>
+  <line x1="35" y1="95" x2="68" y2="95" stroke="rgba(201,168,76,.22)" stroke-width=".8"/>
+  <line x1="35" y1="105" x2="70" y2="105" stroke="rgba(201,168,76,.22)" stroke-width=".8"/>
+  <line x1="35" y1="115" x2="66" y2="115" stroke="rgba(201,168,76,.18)" stroke-width=".8"/>
+  <line x1="35" y1="125" x2="70" y2="125" stroke="rgba(201,168,76,.18)" stroke-width=".8"/>
+  <line x1="84" y1="85" x2="120" y2="85" stroke="rgba(255,255,255,.18)" stroke-width=".8"/>
+  <line x1="84" y1="95" x2="118" y2="95" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
+  <line x1="84" y1="105" x2="120" y2="105" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
+  <line x1="84" y1="115" x2="116" y2="115" stroke="rgba(255,255,255,.1)" stroke-width=".8"/>
+  <path d="M48 190 Q56 174 62 168 Q66 165 70 166 Q74 163 76 165 Q80 161 84 163 Q89 174 96 190" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="72" cy="161" r="5.5" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/>
+</svg>
+          <div class="pub-year-overlay">2007</div>
         </div>
       </div>
     </div>
 
-    <!-- 2008 -->
     <div class="tl-year">2008</div>
     <div class="tl-line"></div>
     <div class="tl-content">
       <div class="work-card" data-theme="politics" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: world map silhouette, connecting arcs -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#0f1928 0%,#1a2744 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- simplified world landmass hints -->
-            <ellipse cx="140" cy="68" rx="55" ry="38" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <ellipse cx="260" cy="62" rx="40" ry="30" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <ellipse cx="330" cy="80" rx="28" ry="20" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <!-- connection arcs between regions -->
-            <path d="M140 68 Q200 20 260 62" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" stroke-dasharray="4 3"/>
-            <path d="M260 62 Q295 50 330 80" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1" stroke-dasharray="3 3"/>
-            <path d="M140 68 Q150 110 260 62" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3 4"/>
-            <!-- dots at intersections -->
-            <circle cx="140" cy="68" r="4" fill="var(--gold)" opacity="0.8"/>
-            <circle cx="260" cy="62" r="4" fill="var(--gold)" opacity="0.8"/>
-            <circle cx="330" cy="80" r="3" fill="rgba(201,168,76,0.7)"/>
-            <!-- Brown University label hint -->
-            <rect x="20" y="100" width="90" height="22" rx="3" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-            <text x="65" y="115" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-size="9" font-family="serif" letter-spacing="1">BROWN JOURNAL</text>
-          </svg>
-          <div class="pub-year-overlay">2008</div>
-          <div class="pub-type-overlay">Brown Journal of World Affairs</div>
-        </div>
-        <div class="work-venue"><em>Brown Journal of World Affairs</em>, Vol. XIV, Issue 2, pp. 67–75 (Spring/Summer 2008)</div>
-        <div class="work-type">Journal Article</div>
-        <div class="work-title">The Muslim World in the Global Sporting Arena</div>
-        <div class="work-venue"><em>Brown Journal of World Affairs</em>, Vol. XIV, Issue 2, pp. 67&ndash;75 (Spring/Summer 2008)</div>
-        <div class="work-tags">
-          <span class="work-tag">#Muslim-world</span><span class="work-tag">#postcolonialism</span>
-          <span class="work-tag">#GANEFO</span><span class="work-tag">#Islamic-Games</span><span class="work-tag">#gender</span>
-        </div>
-        <div class="work-abstract">
-          <p>Published in Brown University's prestigious policy journal, this article investigates how modern sport — as a product of Western modernity — both shapes and reflects transformations in the Muslim world. Three illustrative case studies frame the argument: (1) sport and nation-state building in the postcolonial era, from GANEFO (1963) to Gulf commercialisation; (2) the condition of women in Muslim societies through the lens of Muslim women's Olympic participation; and (3) the inaugural 2005 Islamic Solidarity Games as a reassertion of Islamic identity in global sport. The article argues that the Muslim world's engagement with sport is not a simple story of Westernisation, but a complex negotiation between global and local, modernity and authenticity.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            One of the few academic analyses of sport in the Muslim world published in an international affairs journal — bridging sport studies with political science and area studies audiences. It positions sport as a domain of geopolitical significance, not merely cultural practice.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Journal Article &middot; Brown Journal of World Affairs</div>
+          <div class="work-title">The Muslim World in the Global Sporting Arena</div>
+          <div class="work-venue"><em>Brown Journal of World Affairs</em>, Vol. XIV, Issue 2, pp. 67&ndash;75 (Spring/Summer 2008)</div>
+          <div class="work-tags"><span class="work-tag">#Muslim-world</span><span class="work-tag">#postcolonialism</span><span class="work-tag">#GANEFO</span><span class="work-tag">#Islamic-Games</span><span class="work-tag">#gender</span><span class="work-tag">#soft-power</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>This article investigates how modern sport &mdash; as a product of Western modernity and a symbol of globalisation &mdash; both shapes and reflects changes in the Muslim world. Three case studies frame the argument:</p>
+<p><strong>Case 1 &mdash; Sport, politics and the postcolonial era:</strong> From GANEFO (1963, Indonesia) to the Gulf&rsquo;s mega-event investments (Bahrain F1, Dubai World Cup, Qatar 2006 Asian Games), the article traces sport&rsquo;s function from anti-colonial instrument to commercial nation-branding tool.</p>
+<p><strong>Case 2 &mdash; Sport and the condition of women in Muslim societies:</strong> From Nawal Moutawakel&rsquo;s 1984 gold medal to the Islamic Women Games (1993), the article analyses how women&rsquo;s sport participation has become a proxy for measuring &ldquo;progress&rdquo; and &ldquo;secularisation&rdquo; in Muslim societies &mdash; a framework the article critically interrogates.</p>
+<p><strong>Case 3 &mdash; The Islamic Solidarity Games (2005):</strong> The first ever Islamic Solidarity Games in Saudi Arabia, held post-9/11, are analysed as an attempt to rebuild pan-Islamic unity and reframe the global image of Muslim countries as moderate and open.</p>
+<p><strong>Central argument:</strong> The Muslim world&rsquo;s engagement with sport is not a simple story of Westernisation but a complex negotiation between global and local, modernity and authenticity.</p>
+            <div class="significance"><strong>Why it matters</strong>One of the few academic analyses of sport in the Muslim world published in an international affairs journal, bridging sport studies with political science and area studies. It positions sport as a domain of geopolitical significance, not merely cultural practice.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0a1020 0%,#1a2040 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <circle cx="76" cy="105" r="70" fill="rgba(20,50,100,.28)" stroke="rgba(100,150,255,.18)" stroke-width="1"/>
+  <ellipse cx="76" cy="105" rx="27" ry="70" fill="none" stroke="rgba(100,150,255,.1)" stroke-width=".8"/>
+  <ellipse cx="76" cy="105" rx="50" ry="70" fill="none" stroke="rgba(100,150,255,.07)" stroke-width=".8"/>
+  <line x1="6" y1="105" x2="146" y2="105" stroke="rgba(100,150,255,.1)" stroke-width=".8"/>
+  <ellipse cx="93" cy="92" rx="25" ry="15" fill="rgba(201,168,76,.22)" stroke="rgba(201,168,76,.45)" stroke-width=".8"/>
+  <ellipse cx="60" cy="110" rx="20" ry="12" fill="rgba(201,168,76,.18)" stroke="rgba(201,168,76,.38)" stroke-width=".8"/>
+  <path d="M93 92 Q124 42 134 28" fill="none" stroke="rgba(201,168,76,.48)" stroke-width="1" stroke-dasharray="3 2"/>
+  <path d="M60 110 Q36 148 30 168" fill="none" stroke="rgba(201,168,76,.38)" stroke-width="1" stroke-dasharray="3 2"/>
+  <circle cx="112" cy="30" r="7" fill="none" stroke="rgba(100,180,255,.6)" stroke-width="1.5"/>
+  <circle cx="124" cy="30" r="7" fill="none" stroke="rgba(255,100,100,.6)" stroke-width="1.5"/>
+  <circle cx="136" cy="30" r="7" fill="none" stroke="rgba(255,200,0,.6)" stroke-width="1.5"/>
+  <circle cx="30" cy="172" r="15" fill="rgba(0,100,0,.28)" stroke="rgba(0,200,0,.38)" stroke-width="1"/>
+  <text x="30" y="176" text-anchor="middle" font-size="6" fill="rgba(255,255,255,.45)" font-family="serif">ISG</text>
+  <rect x="8" y="194" width="66" height="14" rx="3" fill="rgba(180,0,0,.22)" stroke="rgba(220,50,50,.35)" stroke-width=".8"/>
+  <text x="41" y="204" text-anchor="middle" font-size="5.5" fill="rgba(255,180,180,.65)" font-family="serif" letter-spacing=".5">BROWN JOURNAL</text>
+</svg>
+          <div class="pub-year-overlay">2008</div>
         </div>
       </div>
     </div>
 
-    <!-- 2012 -->
     <div class="tl-year">2012</div>
     <div class="tl-line"></div>
     <div class="tl-content">
       <div class="work-card" data-theme="gender" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: Olympic rings abstraction, veil silhouette, Beijing motif -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a1a2e 0%,#4a1a3a 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- Olympic rings (5 abstract circles) -->
-            <circle cx="140" cy="60" r="22" fill="none" stroke="rgba(100,180,255,0.5)" stroke-width="2.5"/>
-            <circle cx="178" cy="60" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
-            <circle cx="216" cy="60" r="22" fill="none" stroke="rgba(220,50,50,0.5)" stroke-width="2.5"/>
-            <circle cx="254" cy="60" r="22" fill="none" stroke="rgba(255,220,0,0.5)" stroke-width="2.5"/>
-            <circle cx="292" cy="60" r="22" fill="none" stroke="rgba(0,160,80,0.5)" stroke-width="2.5"/>
-            <!-- runner silhouette wearing hijab -->
-            <path d="M340 110 Q342 90 350 80 Q355 72 360 70 Q368 68 372 72 Q376 66 380 64 Q388 60 390 68 Q388 74 382 76 L378 90 Q375 105 370 112 Z" fill="rgba(201,168,76,0.45)" stroke="rgba(201,168,76,0.6)" stroke-width="1"/>
-            <!-- hijab arc -->
-            <path d="M360 70 Q368 60 380 64" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.5"/>
-            <!-- Beijing 2008 hint -->
-            <text x="50" y="110" fill="rgba(255,255,255,0.12)" font-size="28" font-family="serif" letter-spacing="2">北京</text>
-          </svg>
-          <div class="pub-year-overlay">2012</div>
-          <div class="pub-type-overlay">Int. Journal of the History of Sport · Routledge</div>
-        </div>
-        <div class="work-venue"><em>International Journal of the History of Sport</em>, Vol. 29, No. 4, pp. 638–651 · DOI: 10.1080/09523367.2012.658194</div>
-        <div class="work-type">Journal Article &middot; Peer-Reviewed</div>
-        <div class="work-title">Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts</div>
-        <div class="work-venue"><em>International Journal of the History of Sport</em>, Vol. 29, No. 4, pp. 638&ndash;651 &middot; DOI: 10.1080/09523367.2012.658194</div>
-        <div class="work-tags">
-          <span class="work-tag">#Beijing2008</span><span class="work-tag">#hijab</span>
-          <span class="work-tag">#gender</span><span class="work-tag">#Olympics</span>
-          <span class="work-tag">#media-analysis</span><span class="work-tag">#Orientalism</span>
-        </div>
-        <div class="work-abstract">
-          <p>This paper undertakes a comparative analysis of international media accounts — Western (English, French), Arab (Arabic), Iranian, and Chinese — regarding approximately 14 veiled Muslim athletes who competed in Beijing 2008. Using inductive thematic analysis, the paper identifies four dominant discourses: (1) Western secular media framing the veil as incompatible with Olympic values; (2) Iranian and Arab media celebrating veiled athletes as evidence of Muslim women's agency; (3) the "commercialised hijab" debate generated by Roqaya Al-Ghasara's Australian-designed "hijood"; (4) Chinese media using the Games as a narrative of civilisational bridge-building. The paper critically deploys Orientalism theory to challenge the Western media's condescension toward Muslim women's autonomous choices.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            A methodologically distinctive work — one of the few comparative multilingual media analyses in sport studies. It challenges both Western secular universalism and Islamist restrictions on women's bodies, positioning the author as a genuinely cross-cultural scholarly voice.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Journal Article &middot; Peer-Reviewed</div>
+          <div class="work-title">Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts</div>
+          <div class="work-venue"><em>International Journal of the History of Sport</em>, Vol. 29, No. 4, pp. 638&ndash;651 &middot; DOI: 10.1080/09523367.2012.658194</div>
+          <div class="work-tags"><span class="work-tag">#Beijing2008</span><span class="work-tag">#hijab</span><span class="work-tag">#gender</span><span class="work-tag">#Olympics</span><span class="work-tag">#media-analysis</span><span class="work-tag">#Orientalism</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>This paper undertakes a comparative analysis of international media accounts &mdash; Western (English, French), Arab (Arabic), Iranian, and Chinese &mdash; regarding approximately 14 veiled Muslim athletes who competed at Beijing 2008, including Egyptian fencer Shaimaa El Gammal, Bahraini sprinter Roqaya Al-Ghasara, Afghan sprinter Robina Muqimyar, and Iranian rower Homa Hosseini.</p>
+<p><strong>Key argument 1 &mdash; Western secular media:</strong> Framed the hijab as incompatible with Olympic universalist values, depicting it as either a sign of oppression or as &ldquo;invasive&rdquo; political and religious propaganda (particularly from Iran). The IOC was accused of double standards.</p>
+<p><strong>Key argument 2 &mdash; Iranian and Arab press:</strong> Celebrated veiled athletes as disproving Western stereotypes, arguing there is no inherent incompatibility between Islamic devotion and elite athletic achievement. The hijab was presented as empowerment, not obstacle.</p>
+<p><strong>Key argument 3 &mdash; The &ldquo;commercialised hijab&rdquo; debate:</strong> Al-Ghasara&rsquo;s Australian-designed &ldquo;hijood&rdquo; generated debate about whether sportswear can be simultaneously Islamic and commercial. French media distinguished her outfit from Cathy Freeman&rsquo;s Sydney hood: &ldquo;aerodynamic, not religious.&rdquo;</p>
+<p><strong>Key argument 4 &mdash; Chinese media:</strong> Used the Games&rsquo; motto &ldquo;One World, One Dream&rdquo; to present Al-Ghasara&rsquo;s performance as a symbol of civilisational bridge-building, while also addressing the Uygur Muslim community domestically.</p>
+<p><strong>Theoretical framework:</strong> Orientalism (Said), postcolonial theory, and feminist media studies are deployed to challenge Western condescension toward Muslim women&rsquo;s autonomous choices.</p>
+            <div class="significance"><strong>Why it matters</strong>A methodologically distinctive work &mdash; one of the few comparative multilingual media analyses in sport studies. Challenges both Western secular universalism and Islamist restrictions on women&rsquo;s bodies, positioning the author as a genuinely cross-cultural scholarly voice.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0d0d1f 0%,#1f0d1f 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <path d="M5 148 Q76 30 147 148" fill="none" stroke="rgba(255,220,100,.12)" stroke-width="22"/>
+  <path d="M14 174" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+  <path d="M10 174 Q76 108 142 174" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+  <path d="M10 184 Q76 118 142 184" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+  <path d="M10 194 Q76 128 142 194" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
+  <path d="M70 98 L66 122 L63 144 L71 144 L74 126 L77 144 L85 144 L82 122 L78 98z" fill="rgba(255,255,255,.7)"/>
+  <circle cx="74" cy="88" r="11" fill="rgba(255,255,255,.72)"/>
+  <path d="M63 88 Q57 94 55 104 Q61 106 68 100 Q73 106 74 106 Q76 106 80 100 Q87 106 93 104 Q91 94 85 88z" fill="rgba(255,255,255,.62)"/>
+  <path d="M74 106 L57 117 L54 124" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M74 106 L91 113 L95 108" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M67 125 L58 152 L65 154 L73 134z" fill="rgba(255,255,255,.58)"/>
+  <path d="M79 125 L90 146 L83 149 L76 134z" fill="rgba(255,255,255,.58)"/>
+  <circle cx="47" cy="38" r="9" fill="none" stroke="rgba(100,180,255,.62)" stroke-width="1.5"/>
+  <circle cx="62" cy="38" r="9" fill="none" stroke="rgba(255,255,255,.52)" stroke-width="1.5"/>
+  <circle cx="77" cy="38" r="9" fill="none" stroke="rgba(220,50,50,.62)" stroke-width="1.5"/>
+  <circle cx="92" cy="38" r="9" fill="none" stroke="rgba(255,200,0,.62)" stroke-width="1.5"/>
+  <circle cx="107" cy="38" r="9" fill="none" stroke="rgba(0,160,80,.62)" stroke-width="1.5"/>
+  <text x="76" y="215" text-anchor="middle" font-size="12" fill="rgba(255,255,255,.08)" font-family="serif">&#21271;&#20140; 2008</text>
+</svg>
+          <div class="pub-year-overlay">2012</div>
         </div>
       </div>
     </div>
 
-    <!-- 2013 -->
     <div class="tl-year">2013</div>
     <div class="tl-line"></div>
     <div class="tl-content">
-      <div class="work-card" data-theme="islam" onclick="toggleCard(this)" style="margin-bottom:1rem">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: Eiffel Tower, crescent, identity layers -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a1a2e 0%,#2a1a0e 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- Eiffel tower silhouette -->
-            <path d="M180 115 L188 70 L192 50 L196 42 L200 42 L204 50 L208 70 L216 115Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <line x1="184" y1="82" x2="212" y2="82" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <line x1="186" y1="92" x2="210" y2="92" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <!-- crescent moon -->
-            <path d="M270 35 a25 25 0 1 1 0 50 a19 19 0 1 0 0-50z" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
-            <!-- identity layers as concentric arcs -->
-            <path d="M60 115 Q100 60 140 55" fill="none" stroke="rgba(201,168,76,0.35)" stroke-width="1.5" stroke-dasharray="5 3"/>
-            <path d="M60 115 Q100 80 140 78" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-            <path d="M60 115 Q100 95 140 95" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 5"/>
-            <!-- label dots -->
-            <circle cx="140" cy="55" r="3" fill="rgba(201,168,76,0.8)"/>
-            <circle cx="140" cy="78" r="3" fill="rgba(255,255,255,0.4)"/>
-            <circle cx="140" cy="95" r="3" fill="rgba(255,255,255,0.25)"/>
-            <text x="148" y="58" fill="rgba(201,168,76,0.65)" font-size="8" font-family="serif">Muslim</text>
-            <text x="148" y="81" fill="rgba(255,255,255,0.4)" font-size="8" font-family="serif">European</text>
-            <text x="148" y="98" fill="rgba(255,255,255,0.25)" font-size="8" font-family="serif">Citizen</text>
-          </svg>
-          <div class="pub-year-overlay">2013</div>
-          <div class="pub-type-overlay">Religions · MDPI · Open Access</div>
-        </div>
-        <div class="work-venue"><em>Religions</em> (MDPI), Vol. 4, No. 4, pp. 644–656 · Published 10 December 2013 · DOI: 10.3390/rel4040644</div>
-        <div class="work-type">Journal Article &middot; Open Access &middot; Peer-Reviewed</div>
-        <div class="work-title">Sport, Islam, and Muslims in Europe: In Between or on the Margin?</div>
-        <div class="work-venue"><em>Religions</em> (MDPI), Vol. 4, No. 4, pp. 644&ndash;656 &middot; Published 10 December 2013</div>
-        <div class="work-tags">
-          <span class="work-tag">#Islam</span><span class="work-tag">#Europe</span>
-          <span class="work-tag">#France</span><span class="work-tag">#identity</span>
-          <span class="work-tag">#laïcité</span><span class="work-tag">#reverse-migration</span>
-          <span class="work-tag">#Orientalism</span><span class="work-tag">#post-secular</span>
-        </div>
-        <div class="work-abstract">
-          <p>Using Arkoun's concept of "the crisis of meanings," this article examines how misconceptions about Islam's role in Europe distort the discourse on sport, immigration, and integration. France serves as the principal case study — the country where debates on secularism (<em>laïcité</em>), Muslim identity, and republican values are most contentious. The paper is structured across three analytical layers: (1) the religious phenomenon in Europe, drawing on Touraine's distinction between <em>communautarisme</em> (self-segregation) and legitimate "cultural rights"; Habermas's notion of the "post-secular" society; and Arkoun's critique of the Western "culture of disbelief"; (2) a typology of Muslim identity positions in Europe — from Ritualised and Nationalist Islam to Neo-reformist and Secular — providing a sophisticated framework for understanding Muslim heterogeneity; and (3) a series of sport incidents in France used as prisms for the "crisis of meanings": Zidane's headbutt at the 2006 World Cup (read through Orientalist frames of "irrationality" and "Muslim masculinity"); the booing of La Marseillaise at the France–Tunisia friendly (2008); and the halal meals controversy during the 2010 World Cup. The paper also analyses the "reverse migration" phenomenon — North African-origin athletes in Europe choosing to represent Algeria, Tunisia, or Morocco — as a terrain of contested loyalties on both sides of the Mediterranean.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            One of the few academic papers to apply a theoretically sophisticated European sociology of religion framework (Habermas, Touraine, Arkoun, Said) directly to the sport domain. It moves beyond both assimilationist and multiculturalist frameworks to show how sport functions as a politicised space where Muslim athletes are held to impossible double standards of loyalty — in their countries of birth and their countries of origin simultaneously. The Zidane, Marseillaise, and halal incidents remain touchstone cases in the sociology of sport and Islam in Europe.
-          </div>
-        </div>
-      </div>
-
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: UK cityscape dots, community network -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#101825 0%,#1a2530 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- city skyline silhouette -->
-            <rect x="40" y="85" width="15" height="35" fill="rgba(255,255,255,0.06)"/>
-            <rect x="60" y="70" width="20" height="50" fill="rgba(255,255,255,0.07)"/>
-            <rect x="85" y="78" width="12" height="42" fill="rgba(255,255,255,0.06)"/>
-            <rect x="100" y="60" width="25" height="60" fill="rgba(255,255,255,0.08)"/>
-            <rect x="130" y="72" width="18" height="48" fill="rgba(255,255,255,0.06)"/>
-            <!-- community network nodes -->
-            <circle cx="260" cy="45" r="6" fill="rgba(201,168,76,0.7)"/>
-            <circle cx="300" cy="70" r="5" fill="rgba(201,168,76,0.6)"/>
-            <circle cx="340" cy="50" r="5" fill="rgba(201,168,76,0.6)"/>
-            <circle cx="320" cy="95" r="4" fill="rgba(201,168,76,0.5)"/>
-            <circle cx="370" cy="80" r="4" fill="rgba(201,168,76,0.5)"/>
-            <circle cx="280" cy="95" r="3" fill="rgba(201,168,76,0.4)"/>
-            <!-- connecting lines -->
-            <line x1="260" y1="45" x2="300" y2="70" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
-            <line x1="300" y1="70" x2="340" y2="50" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
-            <line x1="300" y1="70" x2="320" y2="95" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-            <line x1="340" y1="50" x2="370" y2="80" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
-            <line x1="320" y1="95" x2="280" y2="95" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
-            <!-- Leicester / Birmingham label -->
-            <text x="215" y="125" fill="rgba(255,255,255,0.18)" font-size="9" font-family="serif" letter-spacing="1">Leicester · Birmingham</text>
-          </svg>
-          <div class="pub-year-overlay">2013</div>
-          <div class="pub-type-overlay">Palgrave Macmillan · Islam in the West</div>
-        </div>
-        <div class="work-venue">In Farrar, Robinson, Vallic &amp; Wetherly (eds.), <em>Islam in the West: Key Issues in Multiculturalism</em>, Palgrave Macmillan (2012), pp. 138–153</div>
-        <div class="work-type">Book Chapter (co-authored with Ian P. Henry)</div>
-        <div class="work-title">Deconstructing the Debate around Sport and the &lsquo;Question&rsquo; of &lsquo;Muslim Minorities&rsquo; in the West</div>
-        <div class="work-venue">In Farrar et al. (eds.), <em>Islam in the West: Key Issues in Multiculturalism</em>, Palgrave Macmillan (2012), pp. 138&ndash;153</div>
-        <div class="work-tags">
-          <span class="work-tag">#Muslim-minorities</span><span class="work-tag">#sport-welfare</span>
-          <span class="work-tag">#UK</span><span class="work-tag">#multiculturalism</span>
-          <span class="work-tag">#Leicester</span><span class="work-tag">#Birmingham</span>
-        </div>
-        <div class="work-abstract">
-          <p>Co-authored with Professor Ian P. Henry (Loughborough University), this chapter appears in a Palgrave volume on Islam and multiculturalism in the West. It critically deconstructs the framing of Muslim communities in British sport policy and welfare discourse, drawing on empirical case studies from Leicester and Birmingham — two cities with significant Muslim populations. The chapter challenges reductive representations of Muslim sporting needs as a "problem" to be managed, arguing instead for a framework that recognises the complex, heterogeneous, and locally specific character of Muslim communities' relationship with sport, leisure, and public services. It connects to the broader chapter's wider argument about sport as a site where the integration debate is tested and contested.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            Brings together the theoretical framework developed in the <em>Religions</em> 2013 article with empirical evidence from British Muslim communities, contributing directly to sport welfare and sport policy debates in a multicultural European context. It is a key reference for practitioners and researchers working on inclusion, diversity, and sport provision for minority communities.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Journal Article &middot; Open Access &middot; Peer-Reviewed</div>
+          <div class="work-title">Sport, Islam, and Muslims in Europe: In Between or on the Margin?</div>
+          <div class="work-venue"><em>Religions</em> (MDPI), Vol. 4, No. 4, pp. 644&ndash;656 &middot; Published 10 December 2013 &middot; DOI: 10.3390/rel4040644</div>
+          <div class="work-tags"><span class="work-tag">#Islam</span><span class="work-tag">#Europe</span><span class="work-tag">#France</span><span class="work-tag">#identity</span><span class="work-tag">#la&iuml;cit&eacute;</span><span class="work-tag">#reverse-migration</span><span class="work-tag">#Orientalism</span><span class="work-tag">#post-secular</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>Using Arkoun&rsquo;s concept of &ldquo;the crisis of meanings,&rdquo; this article examines how misconceptions about Islam&rsquo;s role in Europe distort the discourse on sport, immigration, and integration. France is the principal case study.</p>
+<p><strong>Key argument 1 &mdash; Religion in post-secular Europe:</strong> Drawing on Habermas, Touraine, and Arkoun, the paper argues that sport is a public space where the tension between &ldquo;secularism&rdquo; and &ldquo;post-secular&rdquo; recognition of religious identity is played out. Touraine&rsquo;s distinction between communautarisme (self-segregation) and legitimate &ldquo;cultural rights&rdquo; is central.</p>
+<p><strong>Key argument 2 &mdash; Typology of Muslim identity:</strong> The paper presents a six-category typology of Muslim identity in Europe (Ritualised, Nationalist, Traditionalist, Reformist, Neo-traditionalist, Secular) &mdash; arguing against any monolithic reading of &ldquo;the Muslim community.&rdquo;</p>
+<p><strong>Key argument 3 &mdash; Three sport incidents as prisms:</strong> Zidane&rsquo;s headbutt at the 2006 World Cup (read through Orientalist frames of &ldquo;Muslim irrationality&rdquo;); the booing of La Marseillaise at France&ndash;Tunisia (2008); and the halal meals scandal in the French national team (2010) are analysed as illustrations of the &ldquo;crisis of meanings.&rdquo;</p>
+<p><strong>Key argument 4 &mdash; Reverse migration:</strong> North African-origin athletes in Europe choosing to represent Algeria, Tunisia, or Morocco face a double bind of contested loyalty &mdash; questioned in both their country of birth and country of origin.</p>
+            <div class="significance"><strong>Why it matters</strong>Applies a theoretically sophisticated European sociology of religion framework directly to the sport domain. Moves beyond assimilationist and multiculturalist frameworks to show how sport becomes a politicised space where Muslim athletes face impossible double standards of loyalty.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#10100a 0%,#1a1a0d 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <rect x="0" y="108" width="152" height="112" fill="rgba(25,70,25,.45)"/>
+  <line x1="0" y1="108" x2="152" y2="108" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+  <rect x="0" y="0" width="152" height="108" fill="rgba(180,80,0,.12)"/>
+  <path d="M112 12 a20 20 0 1 1 0 40 a15 15 0 1 0 0-40z" fill="rgba(201,168,76,.5)" stroke="rgba(201,168,76,.75)" stroke-width="1"/>
+  <path d="M28 140 L70 132 L80 138 L38 146z" fill="rgba(255,255,255,.52)"/>
+  <circle cx="26" cy="143" r="7" fill="rgba(255,255,255,.58)"/>
+  <path d="M26 138 L15 133 L9 132" fill="none" stroke="rgba(255,255,255,.48)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="92" cy="126" r="7" fill="rgba(255,220,180,.55)"/>
+  <path d="M90 133 L86 153 L92 153 L95 138 L98 153 L104 153 L100 133z" fill="rgba(255,220,180,.48)"/>
+  <rect x="105" y="126" width="5" height="13" rx="2" fill="rgba(100,200,255,.65)" stroke="rgba(255,255,255,.35)" stroke-width=".5"/>
+  <line x1="136" y1="108" x2="136" y2="58" stroke="rgba(150,100,50,.45)" stroke-width="2"/>
+  <path d="M126 65 Q136 55 146 63 Q136 51 136 55 Q134 49 124 62z" fill="rgba(60,120,40,.45)"/>
+  <path d="M8 108 L12 76 L14 60 L15 55 L16 55 L17 60 L19 76 L23 108z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.1)" stroke-width=".5"/>
+  <text x="76" y="212" text-anchor="middle" font-size="6" fill="rgba(255,255,255,.28)" font-family="serif" letter-spacing=".5">Religions 2013</text>
+</svg>
+          <div class="pub-year-overlay">2013</div>
         </div>
       </div>
     </div>
+
+    <div class="tl-year">2013</div>
+    <div class="tl-line"></div>
+    <div class="tl-content">
+      <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Book Chapter &middot; co-authored with Ian P. Henry &middot; Palgrave</div>
+          <div class="work-title">Deconstructing the Debate around Sport and the &lsquo;Question&rsquo; of &lsquo;Muslim Minorities&rsquo; in the West</div>
+          <div class="work-venue">In Farrar, Robinson, Vallic &amp; Wetherly (eds.), <em>Islam in the West: Key Issues in Multiculturalism</em>, Palgrave Macmillan (2012), pp. 138&ndash;153</div>
+          <div class="work-tags"><span class="work-tag">#Muslim-minorities</span><span class="work-tag">#sport-welfare</span><span class="work-tag">#UK</span><span class="work-tag">#multiculturalism</span><span class="work-tag">#Leicester</span><span class="work-tag">#Birmingham</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>Co-authored with Professor Ian P. Henry, this chapter critically deconstructs how British sport policy and welfare discourse frames Muslim communities as a &ldquo;problem&rdquo; to be managed, drawing on empirical case studies from Leicester and Birmingham.</p>
+<p><strong>Key argument 1 &mdash; Reductive framing:</strong> Mainstream policy and media discourse reduces the question of Muslim sporting needs to a security or integration problem, overlooking the heterogeneity of Muslim communities and the structural barriers (poverty, discrimination, language) that are not religion-specific.</p>
+<p><strong>Key argument 2 &mdash; Sport as citizenship arena:</strong> For Muslim communities in the UK, sport is a field to &ldquo;conquer&rdquo; in order to reconcile multiple identities. For conservative-nationalist movements, sport is a public (secular) space to safeguard from the &ldquo;over-visibility&rdquo; of Islamic identity.</p>
+<p><strong>Key argument 3 &mdash; Policy implications:</strong> The chapter calls for sport welfare policies that engage with the actual diversity of Muslim communities rather than applying culturalist assumptions about sport and religiosity. It highlights the need to separate structural exclusion from cultural or religious difference.</p>
+            <div class="significance"><strong>Why it matters</strong>Combines theoretical framework with empirical evidence from British Muslim communities, contributing directly to sport welfare and inclusion policy debates in a multicultural European context. Key reference for practitioners in sport development and social policy.</div>
+          </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0a101a 0%,#101a2a 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <path d="M40 118 L34 110 L24 118 L28 132 L40 127 L40 195 L114 195 L114 127 L126 132 L130 118 L120 110 L112 118 L92 110 L64 110z" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/>
+  <rect x="58" y="136" width="38" height="24" rx="2" fill="rgba(255,180,0,.15)" stroke="rgba(255,180,0,.3)" stroke-width=".8"/>
+  <text x="77" y="151" text-anchor="middle" font-size="7" fill="rgba(255,180,0,.55)" font-family="sans-serif">SPONSOR</text>
+  <ellipse cx="64" cy="147" rx="13" ry="8" fill="rgba(200,160,120,.4)"/>
+  <ellipse cx="92" cy="147" rx="13" ry="8" fill="rgba(200,160,120,.4)"/>
+  <rect x="5" y="175" width="8" height="45" fill="rgba(255,255,255,.05)"/>
+  <rect x="18" y="163" width="10" height="57" fill="rgba(255,255,255,.06)"/>
+  <rect x="33" y="168" width="8" height="52" fill="rgba(255,255,255,.05)"/>
+  <rect x="112" y="165" width="10" height="55" fill="rgba(255,255,255,.05)"/>
+  <rect x="127" y="172" width="8" height="48" fill="rgba(255,255,255,.05)"/>
+  <circle cx="38" cy="46" r="30" fill="rgba(20,60,100,.4)" stroke="rgba(100,150,255,.25)" stroke-width="1"/>
+  <ellipse cx="38" cy="46" rx="13" ry="30" fill="none" stroke="rgba(100,150,255,.12)" stroke-width=".8"/>
+  <line x1="8" y1="46" x2="68" y2="46" stroke="rgba(100,150,255,.12)" stroke-width=".8"/>
+  <path d="M36 36 a8 8 0 1 1 0 16 a6 6 0 1 0 0-16z" fill="rgba(201,168,76,.5)" stroke="rgba(201,168,76,.7)" stroke-width="1"/>
+  <text x="38" y="90" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.2)" font-family="serif">Leicester&#xB7;Birmingham</text>
+</svg>
+          <div class="pub-year-overlay">2013</div>
+        </div>
+      </div>
+    </div>
+
     <div class="tl-year">2014</div>
     <div class="tl-line"></div>
     <div class="tl-content">
       <div class="work-card" data-theme="politics" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: Tunisian flag motif, stadium, protest wave -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a0a0a 0%,#2a1a1a 60%,#1a2a1a 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- stadium arc -->
-            <path d="M80 120 Q210 30 340 120" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
-            <path d="M95 120 Q210 45 325 120" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
-            <path d="M110 120 Q210 58 310 120" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <!-- crowd dots along stadium arc -->
-            <circle cx="130" cy="99" r="2" fill="rgba(255,255,255,0.3)"/>
-            <circle cx="155" cy="80" r="2" fill="rgba(255,255,255,0.3)"/>
-            <circle cx="180" cy="66" r="2" fill="rgba(255,255,255,0.3)"/>
-            <circle cx="210" cy="58" r="2.5" fill="rgba(201,168,76,0.8)"/>
-            <circle cx="240" cy="66" r="2" fill="rgba(255,255,255,0.3)"/>
-            <circle cx="265" cy="80" r="2" fill="rgba(255,255,255,0.3)"/>
-            <circle cx="290" cy="99" r="2" fill="rgba(255,255,255,0.3)"/>
-            <!-- Tunisian crescent and star -->
-            <circle cx="370" cy="45" r="20" fill="rgba(180,20,20,0.3)" stroke="rgba(220,60,60,0.5)" stroke-width="1"/>
-            <path d="M362 38 a10 10 0 1 1 0 14 a7.5 7.5 0 1 0 0-14z" fill="rgba(255,255,255,0.4)"/>
-            <polygon points="375,41 377,46 382,46 378,49 380,54 375,51 370,54 372,49 368,46 373,46" fill="rgba(255,255,255,0.45)" transform="scale(0.7) translate(165,20)"/>
-            <!-- protest wave -->
-            <path d="M40 100 Q80 85 120 100 Q160 115 200 100 Q240 85 280 100" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
-          </svg>
-          <div class="pub-year-overlay">2014</div>
-          <div class="pub-type-overlay">Routledge · Sport in Islam</div>
-        </div>
-        <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016) · pp. [Chapter 7]</div>
-        <div class="work-type">Book Chapter</div>
-        <div class="work-title">Sport and Political Transition in Tunisia: Another Terrain of Competition Between Islamists and Seculars</div>
-        <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
-        <div class="work-tags">
-          <span class="work-tag">#Tunisia</span><span class="work-tag">#Arab-Spring</span>
-          <span class="work-tag">#Ennahda</span><span class="work-tag">#London2012</span><span class="work-tag">#Islamism</span>
-        </div>
-        <div class="work-abstract">
-          <p>Written in the wake of the 2011 Arab Spring, this chapter examines sport as a contested terrain during Tunisia's political transition under the Islamist party Ennahda (2012–2014). The author analyses the 2012 London Olympics as a test case: gold medallist Oussama El-Melouli was targeted by a Salafi Jihadi group for drinking water during Ramadan; silver medallist Habiba Ghribi faced calls to have her citizenship stripped for her "indecent" athletic attire. The chapter traces how Tunisia's secular-nationalist sport heritage, built under Bourguiba and Ben Ali, became a battlefield between Islamist and secular movements — with the bodies of female athletes as the central site of contestation.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            A rare primary-source analysis of the intersection of sport, religion, and post-revolutionary politics in North Africa. The chapter demonstrates how sport functions as a barometer of political transition — and how women athletes' bodies become symbolic battlegrounds in ideological struggles.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Book Chapter &middot; Routledge</div>
+          <div class="work-title">Sport and Political Transition in Tunisia: Another Terrain of Competition Between Islamists and Seculars</div>
+          <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
+          <div class="work-tags"><span class="work-tag">#Tunisia</span><span class="work-tag">#Arab-Spring</span><span class="work-tag">#Ennahda</span><span class="work-tag">#London2012</span><span class="work-tag">#Islamism</span><span class="work-tag">#women-athletes</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>Written in the wake of the 2011 Arab Spring, this chapter examines sport as a contested terrain during Tunisia&rsquo;s political transition under the Islamist party Ennahda (2012&ndash;2014).</p>
+<p><strong>Key argument 1 &mdash; Sport and the new power dynamics:</strong> After decades of being weaponised by the Ben Ali regime to project an image of modernity, sport becomes a new battleground between secular forces (who see it as a symbol of secular Tunisia) and Islamist movements (who seek to re-Islamise society).</p>
+<p><strong>Key argument 2 &mdash; El-Melouli and Ramadan:</strong> Gold medallist Oussama El-Melouli was targeted by Salafi Jihadi group Ansar Al-Sharia for drinking water during Ramadan in the 10km race. A Facebook page called for his citizenship to be stripped. The paper analyses this as an illustration of sport as a proxy for debates about secularisation and religiosity.</p>
+<p><strong>Key argument 3 &mdash; Habiba Ghribi&rsquo;s contested body:</strong> Silver medallist Ghribi faced demands for her citizenship to be revoked for competing in &ldquo;indecent attire.&rdquo; Her body becomes a symbolic battlefield between Islamists (who condemn her shorts) and secular feminists (who celebrate her victory as a defiance of Islamisation).</p>
+<p><strong>Key argument 4 &mdash; Ennahda&rsquo;s tactical positioning:</strong> The Ennahda-led government strategically nominated former Al-Jazeera Sport analyst Tariq Diab as Minister of Sport &mdash; a move to reassure the large football-supporting electorate while distancing the party from Salafi extremism.</p>
+            <div class="significance"><strong>Why it matters</strong>A rare primary-source analysis of sport, religion, and post-revolutionary politics in North Africa. Demonstrates how sport functions as a barometer of political transition and how women athletes&rsquo; bodies become symbolic battlegrounds in ideological struggles.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#100808 0%,#1a1008 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <rect x="0" y="125" width="152" height="95" fill="rgba(25,70,25,.45)"/>
+  <path d="M5 160 Q76 100 147 160" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+  <path d="M5 170 Q76 110 147 170" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+  <rect x="0" y="0" width="152" height="62" fill="rgba(180,0,0,.18)"/>
+  <circle cx="76" cy="20" r="13" fill="rgba(200,0,0,.28)" stroke="rgba(220,50,50,.4)" stroke-width=".8"/>
+  <path d="M70 14 a7 7 0 1 1 0 13 a5 5 0 1 0 0-13z" fill="rgba(255,255,255,.48)"/>
+  <circle cx="76" cy="76" r="10" fill="rgba(255,220,180,.65)"/>
+  <path d="M73 75 Q80 65 78 55" fill="none" stroke="rgba(80,50,20,.5)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M73 86 L69 110 L66 128 L73 128 L76 112 L79 128 L86 128 L83 110 L79 86z" fill="rgba(200,50,50,.55)"/>
+  <path d="M75 92 L60 102 L56 98" fill="none" stroke="rgba(255,220,180,.55)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M75 92 L90 98 L95 93" fill="none" stroke="rgba(255,220,180,.55)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M69 110 L61 128 L69 128z" fill="rgba(200,50,50,.48)"/>
+  <path d="M81 110 L89 128 L81 128z" fill="rgba(200,50,50,.48)"/>
+  <circle cx="18" cy="88" r="6" fill="rgba(150,100,50,.45)"/>
+  <path d="M18 94 L15 110 L18 110 L18 102 L21 110 L24 110 L21 94z" fill="rgba(100,80,40,.45)"/>
+  <path d="M18 100 L37 94" fill="none" stroke="rgba(150,100,50,.45)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="138" cy="88" r="6" fill="rgba(150,100,50,.45)"/>
+  <path d="M138 94 L135 110 L138 110 L138 102 L141 110 L144 110 L141 94z" fill="rgba(100,80,40,.45)"/>
+  <text x="76" y="215" text-anchor="middle" font-size="6" fill="rgba(255,180,100,.38)" font-family="serif">Tunisia &#xB7; London 2012</text>
+</svg>
+          <div class="pub-year-overlay">2014</div>
         </div>
       </div>
     </div>
 
-    <!-- 2016 -->
     <div class="tl-year">2016</div>
     <div class="tl-line"></div>
     <div class="tl-content">
-      <div class="work-card" data-theme="islam" onclick="toggleCard(this)" style="margin-bottom:1rem">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: book cover motif, globe with multiple flags/pins -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#0a1520 0%,#1a2a3a 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- book spine -->
-            <rect x="60" y="20" width="18" height="105" rx="2" fill="rgba(201,168,76,0.25)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
-            <!-- book pages fan -->
-            <rect x="78" y="22" width="80" height="101" rx="1" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <line x1="78" y1="40" x2="158" y2="40" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-            <line x1="78" y1="55" x2="158" y2="55" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-            <line x1="78" y1="70" x2="158" y2="70" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-            <line x1="78" y1="85" x2="158" y2="85" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-            <line x1="78" y1="100" x2="158" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
-            <!-- Routledge text on spine -->
-            <text x="69" y="110" fill="rgba(201,168,76,0.6)" font-size="7" font-family="serif" writing-mode="tb">ROUTLEDGE</text>
-            <!-- world pins for multinational scope -->
-            <circle cx="240" cy="70" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-            <ellipse cx="240" cy="70" rx="14" ry="35" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <line x1="205" y1="70" x2="275" y2="70" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
-            <!-- country pins -->
-            <circle cx="230" cy="55" r="3" fill="rgba(201,168,76,0.8)"/>
-            <circle cx="255" cy="65" r="3" fill="rgba(201,168,76,0.7)"/>
-            <circle cx="225" cy="80" r="3" fill="rgba(201,168,76,0.7)"/>
-            <circle cx="248" cy="85" r="2.5" fill="rgba(201,168,76,0.6)"/>
-            <circle cx="238" cy="50" r="2.5" fill="rgba(201,168,76,0.6)"/>
-            <!-- contributor dots -->
-            <text x="300" y="45" fill="rgba(255,255,255,0.2)" font-size="8" font-family="serif">14 contributors</text>
-            <text x="300" y="58" fill="rgba(255,255,255,0.15)" font-size="8" font-family="serif">8 countries</text>
-          </svg>
-          <div class="pub-year-overlay">2016</div>
-          <div class="pub-type-overlay">Routledge · Edited Volume</div>
-        </div>
-        <div class="work-venue">Routledge, London (2016) · Series: Routledge Research in Sport, Culture and Society, No. 50</div>
-        <div class="work-type">Edited Book &middot; Routledge</div>
-        <div class="work-title">Sport in Islam and in Muslim Communities (co-edited with Alberto Testa)</div>
-        <div class="work-venue">Routledge, London (2016) &middot; Series: Routledge Research in Sport, Culture and Society, No. 50</div>
-        <div class="work-tags">
-          <span class="work-tag">#edited-volume</span><span class="work-tag">#Islam</span>
-          <span class="work-tag">#Muslim-communities</span><span class="work-tag">#comparative</span><span class="work-tag">#Routledge</span>
-        </div>
-        <div class="work-abstract">
-          <p>This edited volume brings together 14 contributions from scholars across sport sociology, anthropology, Islamic studies, and political science to examine sport in Muslim-majority countries and among Muslim minorities in the West. Structured across four parts — Understanding Sport in Islam; Gender, Body and Culture; Sport and Politics of Identity; Sport Development and Sport for Development — the volume offers the most comprehensive comparative treatment of its subject to date. Chapters cover Germany, Norway, Turkey, Palestine, Tunisia, Malaysia, the UK, and Italy. Amara co-authored the Introduction and Conclusion, and contributed the Tunisia chapter.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            The first systematic comparative edited volume on sport and Islam across both Muslim-majority and Muslim-minority contexts. Published by the world's leading sport studies publisher, it became a standard reference in the field and is widely assigned in graduate courses in sport sociology, Islamic studies, and migration studies.
+      <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Edited Book &middot; Routledge &middot; co-edited with Alberto Testa</div>
+          <div class="work-title">Sport in Islam and in Muslim Communities</div>
+          <div class="work-venue">Routledge, London (2016) &middot; Series: Routledge Research in Sport, Culture and Society, No. 50</div>
+          <div class="work-tags"><span class="work-tag">#edited-volume</span><span class="work-tag">#Islam</span><span class="work-tag">#Muslim-communities</span><span class="work-tag">#comparative</span><span class="work-tag">#Routledge</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>This edited volume brings together 14 contributions from scholars across sport sociology, anthropology, Islamic studies, and political science to examine sport in Muslim-majority countries and among Muslim minorities in the West, across 8 countries including Germany, Norway, Turkey, Palestine, Tunisia, Malaysia, the UK, and Italy.</p>
+<p><strong>Part I &mdash; Understanding Sport in Islam:</strong> Provides the theological and jurisprudential framework for the entire volume. Examines the Islamic conception of sport participation and its complex relations with modern secular sport.</p>
+<p><strong>Part II &mdash; Gender, Body and Culture:</strong> Examines barriers Muslim girls face in Germany; tomboyism and gender identity among British Muslim women; Erd&oğan;&rsquo;s gender politics in Turkish sport; and football, war and masculinities in the Gaza Strip.</p>
+<p><strong>Part III &mdash; Sport and Politics of Identity:</strong> Covers sport in Tunisia&rsquo;s post-Arab Spring transition (Amara); women&rsquo;s bodies and sport in Turkey; Islam and rehabilitation of British-Muslim ex-offenders through boxing; and Islamophobia in Italian football through the lens of Algerian-Italian novelist Amara Lakhous.</p>
+<p><strong>Part IV &mdash; Sport Development and Sport for Development:</strong> Examines sport integration discourse in Norway; Islamic and halal sport marketing (Bodet &amp; Amara); sport policy and Islam in Malaysia; and Muslim footballers as sport diplomats of faith.</p>
+            <div class="significance"><strong>Why it matters</strong>The first systematic comparative edited volume on sport and Islam across both Muslim-majority and Muslim-minority contexts. Published by the world&rsquo;s leading sport studies publisher, it is widely assigned in graduate courses in sport sociology, Islamic studies, and migration studies.</div>
           </div>
         </div>
-      </div>
-
-      <div class="work-card" data-theme="marketing" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: halal/haram scales, brand logos abstracted, crescent -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a1a10 0%,#2a2a10 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- balance scales -->
-            <line x1="210" y1="25" x2="210" y2="115" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-            <line x1="155" y1="55" x2="265" y2="55" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-            <!-- left pan -->
-            <path d="M140 55 Q155 80 170 55" fill="none" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
-            <text x="155" y="75" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-size="9" font-family="serif">حلال</text>
-            <!-- right pan (tilted slightly lower = haram heavier) -->
-            <path d="M250 65 Q265 90 280 65" fill="none" stroke="rgba(180,60,60,0.6)" stroke-width="1.5"/>
-            <text x="265" y="85" text-anchor="middle" fill="rgba(200,80,80,0.7)" font-size="9" font-family="serif">حرام</text>
-            <!-- brand abstraction circles -->
-            <circle cx="80" cy="45" r="18" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <text x="80" y="49" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="9" font-family="serif">Brand</text>
-            <circle cx="340" cy="45" r="18" fill="rgba(255,255,255,0.04)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-            <text x="340" y="49" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="9" font-family="serif">Market</text>
-            <!-- connecting dotted line -->
-            <line x1="98" y1="45" x2="322" y2="45" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
-            <!-- sponsor jersey shape -->
-            <path d="M75 90 L80 80 L90 83 L95 78 L100 78 L105 83 L115 80 L120 90 L115 115 L80 115 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-          </svg>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#080d18 0%,#0d1828 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <rect x="18" y="15" width="118" height="158" rx="4" fill="rgba(30,50,100,.45)" stroke="rgba(100,150,255,.28)" stroke-width="1.5"/>
+  <rect x="18" y="15" width="14" height="158" rx="2" fill="rgba(201,168,76,.38)" stroke="rgba(201,168,76,.5)" stroke-width="1"/>
+  <ellipse cx="90" cy="83" rx="44" ry="35" fill="rgba(20,80,140,.38)" stroke="rgba(100,180,255,.22)" stroke-width=".8"/>
+  <path d="M57 74 Q70 66 80 71 Q74 81 64 78z" fill="rgba(60,160,60,.38)"/>
+  <path d="M83 68 Q97 63 108 74 Q101 84 91 78 Q87 73 83 68z" fill="rgba(60,160,60,.38)"/>
+  <path d="M110 76 Q120 71 124 81 Q118 88 110 84z" fill="rgba(60,160,60,.32)"/>
+  <circle cx="68" cy="74" r="2.5" fill="rgba(255,200,0,.72)"/>
+  <circle cx="97" cy="69" r="2.5" fill="rgba(255,200,0,.72)"/>
+  <circle cx="114" cy="78" r="2.5" fill="rgba(255,200,0,.72)"/>
+  <circle cx="56" cy="88" r="2.5" fill="rgba(255,200,0,.72)"/>
+  <rect x="32" y="120" width="90" height="5" rx="1" fill="rgba(255,255,255,.22)"/>
+  <rect x="40" y="130" width="72" height="4" rx="1" fill="rgba(255,255,255,.14)"/>
+  <rect x="46" y="138" width="62" height="3" rx="1" fill="rgba(201,168,76,.38)"/>
+  <text x="25" y="154" font-size="5" fill="rgba(201,168,76,.55)" font-family="serif" writing-mode="tb" letter-spacing="1">ROUTLEDGE</text>
+  <text x="90" y="192" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.22)" font-family="serif">14 contributors &#xB7; 8 countries</text>
+</svg>
           <div class="pub-year-overlay">2016</div>
-          <div class="pub-type-overlay">Routledge · Sport Marketing</div>
-        </div>
-        <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
-        <div class="work-type">Book Chapter (co-authored with Guillaume Bodet)</div>
-        <div class="work-title">Islamic Sport Marketing or Sport Marketing in Muslim Countries and Communities</div>
-        <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
-        <div class="work-tags">
-          <span class="work-tag">#halal-marketing</span><span class="work-tag">#sport-marketing</span>
-          <span class="work-tag">#consumerism</span><span class="work-tag">#Gulf</span><span class="work-tag">#Qatar</span>
-        </div>
-        <div class="work-abstract">
-          <p>This chapter examines the emerging field of "Islamic marketing" in relation to sport, interrogating whether marketing — rooted in free-market capitalism and consumerism — can be genuinely reconciled with Islamic ethics. The chapter surveys halal/haram distinctions in sport sponsorship (alcohol, gambling, usury), analyses case studies including Frederic Kanoute's refusal to wear a gambling sponsor's shirt, Papiss Cissé's dispute with Newcastle FC over the Wonga logo, and Qatar's dilemma over beer sponsorship at the 2022 FIFA World Cup. It also examines the growing halal beer market as a paradox of Islamic consumerism.</p>
-          <div class="significance">
-            <strong>Why it matters</strong>
-            Provides the first theoretical framework for understanding sport marketing in Muslim contexts — a gap that became commercially urgent as Gulf states invested billions in global sport and as the Muslim consumer market reached 1.8 billion people. Directly relevant to practitioners in sport management and brand strategy.
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- 2022 -->
+    <div class="tl-year">2016</div>
+    <div class="tl-line"></div>
+    <div class="tl-content">
+      <div class="work-card" data-theme="marketing" onclick="toggleCard(this)">
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Book Chapter &middot; co-authored with Guillaume Bodet</div>
+          <div class="work-title">Islamic Sport Marketing or Sport Marketing in Muslim Countries and Communities</div>
+          <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
+          <div class="work-tags"><span class="work-tag">#halal-marketing</span><span class="work-tag">#sport-marketing</span><span class="work-tag">#consumerism</span><span class="work-tag">#Gulf</span><span class="work-tag">#Qatar</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>This chapter examines the emerging field of &ldquo;Islamic marketing&rdquo; in relation to sport, interrogating whether marketing &mdash; rooted in free-market capitalism and consumerism &mdash; can be genuinely reconciled with Islamic ethics.</p>
+<p><strong>Key argument 1 &mdash; Marketing and Islamic ethics:</strong> The chapter asks whether Islamic marketing is an oxymoron, since marketing promotes consumerism, while Islam prioritises collective welfare, prohibition of usury (riba), and temperance. The growing Muslim consumer market (1.8 billion people; global halal industry valued at US$547 billion) makes this a commercially urgent question.</p>
+<p><strong>Key argument 2 &mdash; Haram sport marketing:</strong> Case studies include: Frederic Kanoute&rsquo;s refusal to wear a gambling sponsor&rsquo;s shirt at Seville FC; Papiss Ciss&eacute;&rsquo;s dispute with Newcastle FC over the Wonga payday loan logo; Faward Ahmed refusing alcohol sponsorship on the Australian cricket team; and Qatar&rsquo;s dilemma over Budweiser&rsquo;s FIFA World Cup sponsorship.</p>
+<p><strong>Key argument 3 &mdash; Halal sport marketing:</strong> Examines the growing halal beer market (Barbican, Laziza, Holsten non-alcoholic), the &ldquo;halalisation&rdquo; of global brands (Nike, Colgate), and Gulf state investments in global sport (Real Madrid, PSG, Manchester City) as a form of &ldquo;Islamic&rdquo; soft power marketing.</p>
+<p><strong>Key argument 4 &mdash; The paradox:</strong> Is halal sport marketing not the &ldquo;Trojan horse&rdquo; of Western consumerist ideology, using Islamic branding to expand a fundamentally non-Islamic consumer culture?</p>
+            <div class="significance"><strong>Why it matters</strong>Provides the first theoretical framework for understanding sport marketing in Muslim contexts &mdash; a gap that became commercially urgent as Gulf states invested billions in global sport. Directly relevant to sport management practitioners and brand strategists operating in MENA markets.</div>
+          </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0d100a 0%,#1a180a 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <line x1="76" y1="20" x2="76" y2="108" stroke="rgba(201,168,76,.48)" stroke-width="2"/>
+  <circle cx="76" cy="20" r="4" fill="rgba(201,168,76,.6)"/>
+  <line x1="26" y1="56" x2="126" y2="68" stroke="rgba(201,168,76,.48)" stroke-width="2"/>
+  <path d="M16 56 Q26 75 36 56" fill="none" stroke="rgba(0,200,0,.58)" stroke-width="1.5"/>
+  <rect x="12" y="52" width="28" height="4" rx="1" fill="rgba(0,150,0,.28)" stroke="rgba(0,200,0,.4)" stroke-width=".8"/>
+  <text x="26" y="50" text-anchor="middle" font-size="11" fill="rgba(0,220,0,.65)" font-family="serif">&#1581;&#1604;&#1575;&#1604;</text>
+  <circle cx="24" cy="72" r="5" fill="rgba(255,255,255,.28)"/>
+  <path d="M22 68 l2-1.5 2 1.5 .8 3-1.5 2h-3l-1.5-2z" fill="rgba(30,30,30,.45)"/>
+  <path d="M116 68 Q126 87 136 68" fill="none" stroke="rgba(200,50,50,.58)" stroke-width="1.5"/>
+  <rect x="112" y="64" width="28" height="4" rx="1" fill="rgba(150,0,0,.28)" stroke="rgba(200,50,50,.4)" stroke-width=".8"/>
+  <text x="126" y="62" text-anchor="middle" font-size="11" fill="rgba(220,80,80,.65)" font-family="serif">&#1581;&#1585;&#1575;&#1605;</text>
+  <rect x="118" y="74" width="10" height="16" rx="1" fill="rgba(255,200,0,.28)" stroke="rgba(255,180,0,.48)" stroke-width=".8"/>
+  <path d="M128 77 Q134 77 134 84 Q134 91 128 91" fill="none" stroke="rgba(255,180,0,.38)" stroke-width="1"/>
+  <path d="M44 123 L37 115 L27 123 L31 136 L42 130 L42 196 L114 196 L114 130 L125 136 L129 123 L119 115 L112 123 L92 115 L65 115z" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+  <rect x="57" y="144" width="40" height="24" rx="2" fill="rgba(255,180,0,.12)" stroke="rgba(255,180,0,.28)" stroke-width=".8"/>
+  <ellipse cx="64" cy="155" rx="13" ry="8" fill="rgba(200,160,120,.38)"/>
+  <ellipse cx="94" cy="155" rx="13" ry="8" fill="rgba(200,160,120,.38)"/>
+</svg>
+          <div class="pub-year-overlay">2016</div>
+        </div>
+      </div>
+    </div>
+
     <div class="tl-year">2022</div>
     <div class="tl-line"></div>
     <div class="tl-content">
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
-        <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <!-- Illustration: Qatar skyline, football, faith motifs -->
-        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a0a0a 0%,#3a1a0a 50%,#1a1a2a 100%)">
-          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
-            <!-- Doha skyline silhouette -->
-            <rect x="40" y="75" width="10" height="50" fill="rgba(255,255,255,0.07)"/>
-            <rect x="55" y="60" width="12" height="65" fill="rgba(255,255,255,0.08)"/>
-            <rect x="72" y="50" width="8" height="75" fill="rgba(255,255,255,0.06)"/>
-            <path d="M84 45 L88 50 L84 55 L84 125 L100 125 L100 50 L96 50 Z" fill="rgba(255,255,255,0.07)"/>
-            <rect x="105" y="65" width="14" height="60" fill="rgba(255,255,255,0.06)"/>
-            <rect x="124" y="78" width="10" height="47" fill="rgba(255,255,255,0.05)"/>
-            <!-- FIFA World Cup trophy abstraction -->
-            <path d="M220 35 L228 35 L230 55 Q235 65 228 72 L220 72 Q213 65 218 55 Z" fill="rgba(201,168,76,0.35)" stroke="rgba(201,168,76,0.6)" stroke-width="1"/>
-            <rect x="221" y="72" width="7" height="8" fill="rgba(201,168,76,0.4)"/>
-            <rect x="217" y="80" width="15" height="4" rx="1" fill="rgba(201,168,76,0.35)"/>
-            <!-- football -->
-            <circle cx="310" cy="70" r="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
-            <path d="M300 58 l10-5 10 5 4 12-7 9h-14l-7-9z" fill="rgba(30,30,30,0.5)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-            <!-- Qatar crescent -->
-            <path d="M360 30 a18 18 0 1 1 0 36 a14 14 0 1 0 0-36z" fill="rgba(130,0,0,0.5)" stroke="rgba(200,60,60,0.6)" stroke-width="1"/>
-            <!-- Ramadan crescent moon (thin) -->
-            <path d="M165 25 a12 12 0 1 1 0 24 a9 9 0 1 0 0-24z" fill="none" stroke="rgba(201,168,76,0.55)" stroke-width="1.5"/>
-          </svg>
-          <div class="pub-year-overlay">2022</div>
-          <div class="pub-type-overlay">Qatar University · Football &amp; Faith</div>
-        </div>
-        <div class="work-venue">Mahfoud Amara &amp; Youcef Bouandel · Qatar University · 2022</div>
-        <div class="work-type">Article (co-auteur : Youcef Bouandel, Universit&eacute; du Qatar)</div>
-        <div class="work-title">La Coupe du monde 2022 de la FIFA, entre football et foi</div>
-        <div class="work-venue">Mahfoud Amara &amp; Youcef Bouandel &middot; Qatar University &middot; 2022</div>
-        <div class="work-tags">
-          <span class="work-tag">#Qatar2022</span><span class="work-tag">#Islam</span>
-          <span class="work-tag">#football</span><span class="work-tag">#foi</span>
-          <span class="work-tag">#méga-événement</span><span class="work-tag">#sécularisation</span>
-          <span class="work-tag">#joueurs-musulmans</span>
-        </div>
-        <div class="work-abstract">
-          <p>Cet article examine la Coupe du monde 2022 de la FIFA au Qatar comme un prisme révélateur des tensions entre sport, religion, modernité et identité. Structuré en trois parties, il traite d'abord de la manière dont le Qatar — en tant que pays arabe et majoritairement musulman accueillant pour la première fois la Coupe du monde — a dû naviguer entre les exigences commerciales et organisationnelles du tournoi (alcool, droits LGBT+, culture des supporters) et les valeurs islamiques locales. La deuxième partie analyse la participation des pays à majorité musulmane (Maroc, Tunisie, Arabie saoudite, Iran) et interroge ce que cela signifie dans le contexte des débats sur l'islam et la sécularisation. La troisième partie se penche sur les joueurs professionnels de culture et d'origine musulmane — tels que Mohamed Salah, Sadio Mané et Achraf Hakimi — qui doivent naviguer entre leur identité religieuse, les attentes de leurs clubs et sponsors, et les pressions des médias sociaux. L'article ouvre également sur la question plus large du football comme quasi-religion : de l'Iglesia Maradoniana à la vénération des stades, le football partage avec la religion des rituels, des sanctuaires et une communauté de croyants.</p>
-          <div class="significance">
-            <strong>Pourquoi ce travail est important</strong>
-            Première analyse académique de la Coupe du monde 2022 sous l'angle de l'islam et de la foi, co-produite depuis le Qatar pendant l'événement lui-même. L'article articule les débats sur la gouvernance mondiale du sport, les droits culturels, l'islamophobie, et la diplomatie sportive des États du Golfe — des enjeux directement liés à la position géographique et institutionnelle de l'auteur à Qatar University.
+        <button class="expand-btn" onclick="event.stopPropagation();toggleCard(this.parentElement)">+</button>
+        <div class="card-body">
+          <div class="work-type">Article &middot; co-auteur Youcef Bouandel &middot; Qatar University</div>
+          <div class="work-title">La Coupe du monde 2022 de la FIFA, entre football et foi</div>
+          <div class="work-venue">Mahfoud Amara &amp; Youcef Bouandel &middot; Qatar University &middot; 2022</div>
+          <div class="work-tags"><span class="work-tag">#Qatar2022</span><span class="work-tag">#Islam</span><span class="work-tag">#football</span><span class="work-tag">#foi</span><span class="work-tag">#m&eacute;ga-&eacute;v&eacute;nement</span><span class="work-tag">#s&eacute;cularisation</span><span class="work-tag">#joueurs-musulmans</span></div>
+          <div class="click-hint">Click to read summary &amp; key arguments</div>
+          <div class="work-abstract">
+            <p>Cet article examine la Coupe du monde 2022 de la FIFA au Qatar comme un prisme r&eacute;v&eacute;lateur des tensions entre sport, religion, modernit&eacute; et identit&eacute; dans le monde musulman.</p>
+<p><strong>Argument central &mdash; Football comme quasi-religion:</strong> De l&rsquo;Iglesia Maradoniana aux c&eacute;l&eacute;brations spirituelles de Mohammed Salah (Sujud apr&egrave;s chaque but) en passant par les stades-sanctuaires comme Anfield et Maracan&atilde;, le football emprunte &agrave; la religion ses rituels, ses communaut&eacute;s et ses symboles.</p>
+<p><strong>Partie 1 &mdash; Le Qatar pays h&ocirc;te musulman:</strong> Le Qatar a d&ucirc; n&eacute;gocier entre les exigences commerciales du tournoi (alcool, droits LGBT+, culture des supporters) et les valeurs islamiques locales. L&rsquo;article analyse la d&eacute;cision de ne pas autoriser la vente d&rsquo;alcool dans les stades, la gestion des manifestations LGBT+, et les d&eacute;clarations controvers&eacute;es de l&rsquo;ambassadeur Mohammed Aboutrika.</p>
+<p><strong>Partie 2 &mdash; Pays musulmans et s&eacute;cularisation:</strong> La participation du Maroc, de la Tunisie, de l&rsquo;Ir&agrave;n et de l&rsquo;Arabie saoudite illustre diff&eacute;rentes trajectoires entre islam d&rsquo;&Eacute;tat, islamisme politique, et r&eacute;forme. La pression sur les joueurs iraniens de prendre position face aux protestations post-Mahsa Amini est analys&eacute;e.</p>
+<p><strong>Partie 3 &mdash; Joueurs professionnels musulmans:</strong> Des joueurs comme Sadio Man&eacute;, Achraf Hakimi et Mohamed Salah naviguent entre identit&eacute; religieuse, contrats de club, sponsors et pressions des r&eacute;seaux sociaux. L&rsquo;article examine comment l&rsquo;expression publique de la foi islamique peut r&eacute;duire l&rsquo;islamophobie (r&eacute;f&eacute;rence &agrave; l&rsquo;&eacute;tude Mousa sur Salah et la baisse des crimes de haine &agrave; Liverpool de 16%).</p>
+            <div class="significance"><strong>Why it matters</strong>Premi&egrave;re analyse acad&eacute;mique de la Coupe du monde 2022 sous l&rsquo;angle de l&rsquo;islam et de la foi, co-produite depuis Qatar University pendant l&rsquo;&eacute;v&eacute;nement lui-m&ecirc;me. Articule les d&eacute;bats sur la gouvernance mondiale du sport, les droits culturels, l&rsquo;islamophobie, et la diplomatie sportive des &Eacute;tats du Golfe.</div>
           </div>
+        </div>
+        <div class="pub-illustration" style="background:linear-gradient(160deg,#0d0808 0%,#1a1208 80%,#081020 100%)">
+          <svg viewBox="0 0 152 220" preserveAspectRatio="xMidYMid slice">
+  <rect x="0" y="0" width="152" height="130" fill="rgba(0,0,0,.28)"/>
+  <circle cx="14" cy="12" r=".8" fill="rgba(255,255,255,.48)"/>
+  <circle cx="42" cy="8" r=".8" fill="rgba(255,255,255,.38)"/>
+  <circle cx="68" cy="16" r="1" fill="rgba(255,255,255,.52)"/>
+  <circle cx="102" cy="7" r=".8" fill="rgba(255,255,255,.38)"/>
+  <circle cx="132" cy="12" r=".8" fill="rgba(255,255,255,.48)"/>
+  <path d="M116 9 a17 17 0 1 1 0 34 a12 12 0 1 0 0-34z" fill="rgba(201,168,76,.52)" stroke="rgba(201,168,76,.78)" stroke-width="1"/>
+  <rect x="5" y="75" width="8" height="57" fill="rgba(255,255,255,.07)"/>
+  <rect x="18" y="60" width="10" height="72" fill="rgba(255,255,255,.08)"/>
+  <path d="M32 46 L30 82 L38 82 L36 46z" fill="rgba(255,255,255,.06)"/>
+  <ellipse cx="34" cy="44" rx="4" ry="6" fill="rgba(255,255,255,.05)"/>
+  <rect x="44" y="56" width="7" height="76" fill="rgba(255,255,255,.06)"/>
+  <path d="M70 38 L79 38 L81 57 Q86 65 79 72 L70 72 Q64 65 68 57z" fill="rgba(201,168,76,.48)" stroke="rgba(201,168,76,.68)" stroke-width="1"/>
+  <rect x="71" y="72" width="7" height="7" fill="rgba(201,168,76,.42)"/>
+  <rect x="68" y="79" width="13" height="4" rx="1" fill="rgba(201,168,76,.38)"/>
+  <rect x="0" y="130" width="152" height="90" fill="rgba(25,70,25,.48)"/>
+  <line x1="0" y1="130" x2="152" y2="130" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+  <path d="M92 148 L112 140 L119 149 L99 157z" fill="rgba(255,255,255,.48)"/>
+  <circle cx="90" cy="154" r="7" fill="rgba(255,255,255,.52)"/>
+  <path d="M90 150 L78 144 L72 143" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="58" cy="165" r="9" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.3)" stroke-width=".8"/>
+  <path d="M54 161 l4-3 4 3 1.5 5-3 4h-5l-3-4z" fill="rgba(30,30,30,.4)"/>
+  <text x="76" y="216" text-anchor="middle" font-size="7" fill="rgba(201,168,76,.42)" font-family="serif" letter-spacing="1">QATAR 2022</text>
+</svg>
+          <div class="pub-year-overlay">2022</div>
         </div>
       </div>
     </div>
 
   </div><!-- end timeline -->
-
-  <div class="no-results" id="no-results">No works match your search. Try different keywords or clear the search field.</div>
-
+  <div class="no-results" id="no-results">No works match your search. Try different keywords or clear the search.</div>
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <p>Prof. Mahfoud Amara · Qatar University, College of Sport Sciences · 
-  <a href="/cdn-cgi/l/email-protection#1d70337c707c6f7c5d6c6833787968336c7c"><span class="__cf_email__" data-cfemail="c9a4e7a8a4a8bba889b8bce7acadbce7b8a8">[email&#160;protected]</span></a> · 
-  <a href="#">ResearchGate</a> · <a href="#">ORCID</a></p>
-  <p style="margin-top:0.5rem; font-size:0.74rem; opacity:0.6;">
-    This platform is built with GitHub Pages + Markdown. 
-    Repository: <a href="#">github.com/mahfoud-amara/academic-portfolio</a>
-  </p>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-visit-num" id="visitor-count">&#8212;</div>
+      <div class="footer-visit-label">Page Visits</div>
+    </div>
+    <div class="footer-divider"></div>
+    <div>
+      <div class="footer-name">Prof. Mahfoud Amara</div>
+      <div class="footer-inst">Qatar University &middot; College of Sport Sciences</div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-links">
+      <a href="/cdn-cgi/l/email-protection#ef82c18e828e9d8eaf9e9ac18a8b9ac19e8e">Email</a>
+      <a href="#">ResearchGate</a>
+      <a href="#">ORCID</a>
+    </div>
+  </div>
+  <div class="footer-copy">Sport in Islam and Muslim Communities Project &middot; GitHub Pages</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* VISITOR COUNTER */
-(function() {
-  try {
-    const key = 'simc_visits';
-    let count = parseInt(localStorage.getItem(key) || '0', 10) + 1;
-    localStorage.setItem(key, count);
-    const el = document.getElementById('visitor-count');
-    if (el) {
-      let start = 0, end = count;
-      const step = Math.max(1, Math.ceil(end / 30));
-      const timer = setInterval(() => {
-        start = Math.min(start + step, end);
-        el.textContent = start.toLocaleString();
-        if (start >= end) clearInterval(timer);
-      }, 20);
+(function(){
+  try{
+    var k='simc_visits', c=parseInt(localStorage.getItem(k)||'0',10)+1;
+    localStorage.setItem(k,c);
+    var el=document.getElementById('visitor-count');
+    if(el){
+      var s=0,step=Math.max(1,Math.ceil(c/30));
+      var t=setInterval(function(){s=Math.min(s+step,c);el.textContent=s.toLocaleString();if(s>=c)clearInterval(t);},20);
     }
-  } catch(e) {}
+  }catch(e){}
 })();
 
-/* READING PROGRESS BAR */
-window.addEventListener('scroll', () => {
-  const doc = document.documentElement;
-  const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
-  const bar = document.getElementById('reading-bar');
-  if (bar) bar.style.width = Math.min(100, scrolled * 100) + '%';
-  const btn = document.getElementById('scroll-top');
-  if (btn) {
-    if (doc.scrollTop > 400) btn.classList.add('visible');
-    else btn.classList.remove('visible');
-  }
+/* READING PROGRESS + SCROLL TOP */
+window.addEventListener('scroll',function(){
+  var doc=document.documentElement;
+  var pct=doc.scrollTop/(doc.scrollHeight-doc.clientHeight);
+  var bar=document.getElementById('reading-bar');
+  if(bar)bar.style.width=Math.min(100,pct*100)+'%';
+  var btn=document.getElementById('scroll-top');
+  if(btn){if(doc.scrollTop>400)btn.classList.add('visible');else btn.classList.remove('visible');}
 });
 
-/* INJECT CLICK HINTS, READING TIME, CITE BUTTONS */
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.work-card').forEach(card => {
-    const abstract = card.querySelector('.work-abstract');
-    const wordCount = abstract ? abstract.innerText.trim().split(/\s+/).length : 0;
-    const mins = Math.max(1, Math.round(wordCount / 200));
-
-    // Reading time badge on work-type
-    const typeEl = card.querySelector('.work-type');
-    if (typeEl) {
-      const badge = document.createElement('span');
-      badge.className = 'read-time';
-      badge.textContent = mins + ' min read';
-      typeEl.appendChild(badge);
-    }
-
-    // Click hint below work-tags
-    const tagsEl = card.querySelector('.work-tags');
-    if (tagsEl) {
-      const hint = document.createElement('div');
-      hint.className = 'click-hint';
-      hint.textContent = 'Click to read summary & significance';
-      tagsEl.after(hint);
-    }
-
-    // Copy citation button
-    if (abstract) {
-      const title = (card.querySelector('.work-title')?.innerText || '').trim();
-      const venue = (card.querySelector('.work-venue')?.innerText || '').trim();
-      const citation = title + '. ' + venue;
-
-      const btn = document.createElement('button');
-      btn.className = 'cite-btn';
-      btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0"><rect x="2" y="4" width="10" height="11" rx="1"/><path d="M5 4V3a1 1 0 011-1h7a1 1 0 011 1v9a1 1 0 01-1 1h-1"/></svg> Copy citation';
-      btn.addEventListener('click', (e) => {
+/* INJECT CLICK-HINTS AND CITE BUTTONS */
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.work-card').forEach(function(card){
+    var ab=card.querySelector('.work-abstract');
+    var words=ab?ab.innerText.trim().split(/\s+/).length:0;
+    var mins=Math.max(1,Math.round(words/200));
+    var typeEl=card.querySelector('.work-type');
+    if(typeEl){var b=document.createElement('span');b.className='read-time';b.textContent=mins+' min read';typeEl.appendChild(b);}
+    if(ab){
+      var title=(card.querySelector('.work-title')||{}).innerText||'';
+      var venue=(card.querySelector('.work-venue')||{}).innerText||'';
+      var btn=document.createElement('button');
+      btn.className='cite-btn';
+      btn.innerHTML='&#128203; Copy citation';
+      btn.addEventListener('click',function(e){
         e.stopPropagation();
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(citation).then(() => {
-            btn.textContent = '\u2713 Copied!';
-            btn.classList.add('copied');
-            setTimeout(() => {
-              btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0"><rect x="2" y="4" width="10" height="11" rx="1"/><path d="M5 4V3a1 1 0 011-1h7a1 1 0 011 1v9a1 1 0 01-1 1h-1"/></svg> Copy citation';
-              btn.classList.remove('copied');
-            }, 2000);
+        var cit=title+'. '+venue;
+        if(navigator.clipboard){
+          navigator.clipboard.writeText(cit).then(function(){
+            btn.textContent='&#10003; Copied!';btn.classList.add('copied');
+            setTimeout(function(){btn.innerHTML='&#128203; Copy citation';btn.classList.remove('copied');},2000);
           });
-        } else {
-          btn.textContent = citation.slice(0, 70) + '...';
-          setTimeout(() => { btn.innerHTML = 'Copy citation'; }, 3000);
         }
       });
-      abstract.appendChild(btn);
+      ab.appendChild(btn);
     }
   });
 });
 
-/* TOGGLE CARD */
-function toggleCard(card) {
-  const isExpanded = card.classList.contains('expanded');
-
-  document.querySelectorAll('.work-card.expanded').forEach(c => {
-    if (c !== card) {
+/* TOGGLE */
+function toggleCard(card){
+  var exp=card.classList.contains('expanded');
+  document.querySelectorAll('.work-card.expanded').forEach(function(c){
+    if(c!==card){
       c.classList.remove('expanded');
-      const hint = c.querySelector('.click-hint');
-      if (hint) hint.textContent = 'Click to read summary';
-      const btn = c.querySelector('.expand-btn');
-      if (btn) btn.textContent = '+';
+      var h=c.querySelector('.click-hint');if(h)h.textContent='Click to read summary & key arguments';
+      var b=c.querySelector('.expand-btn');if(b)b.textContent='+';
     }
   });
-
-  if (!isExpanded) {
+  if(!exp){
     card.classList.add('expanded');
-    const hint = card.querySelector('.click-hint');
-    if (hint) hint.textContent = 'Click to collapse';
-    const btn = card.querySelector('.expand-btn');
-    if (btn) btn.textContent = '\u2212';
-    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+    var h=card.querySelector('.click-hint');if(h)h.textContent='Click to collapse';
+    var b=card.querySelector('.expand-btn');if(b)b.textContent='−';
+    setTimeout(function(){card.scrollIntoView({behavior:'smooth',block:'nearest'});},120);
   } else {
     card.classList.remove('expanded');
-    const hint = card.querySelector('.click-hint');
-    if (hint) hint.textContent = 'Click to read summary';
-    const btn = card.querySelector('.expand-btn');
-    if (btn) btn.textContent = '+';
+    var h=card.querySelector('.click-hint');if(h)h.textContent='Click to read summary & key arguments';
+    var b=card.querySelector('.expand-btn');if(b)b.textContent='+';
   }
 }
 
 /* FILTER */
-function filterWorks(theme, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.value = '';
-  const countEl = document.getElementById('search-count');
-  if (countEl) countEl.textContent = '';
-  clearHighlights();
-
-  document.querySelectorAll('.work-card').forEach(card => {
-    if (theme === 'all' || card.dataset.theme === theme) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
-      card.classList.remove('expanded');
-    }
+function filterWorks(theme,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  else{var ab=document.querySelector('.filter-btn[data-theme="all"]');if(ab)ab.classList.add('active');}
+  var si=document.getElementById('search-input');if(si)si.value='';
+  var sc=document.getElementById('search-count');if(sc)sc.textContent='';
+  clearHL();
+  document.querySelectorAll('.work-card').forEach(function(c){
+    if(theme==='all'||c.dataset.theme===theme){c.classList.remove('hidden');}
+    else{c.classList.add('hidden');c.classList.remove('expanded');}
   });
-
-  updateYearVisibility();
-  checkNoResults();
+  updateYears();checkNone();
 }
 
 /* SEARCH */
-function searchWorks(query) {
-  const q = query.trim().toLowerCase();
-  const cards = document.querySelectorAll('.work-card');
-  let visibleCount = 0;
-
-  clearHighlights();
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  const allBtn = document.querySelector('.filter-btn[data-theme="all"]');
-  if (allBtn) allBtn.classList.add('active');
-
-  cards.forEach(card => {
-    if (!q) {
-      card.classList.remove('hidden');
-      visibleCount++;
-      return;
-    }
-    const searchText = (card.innerText || '').toLowerCase();
-    if (searchText.includes(q)) {
-      card.classList.remove('hidden');
-      highlightInTitle(card, query);
-      visibleCount++;
-    } else {
-      card.classList.add('hidden');
-      card.classList.remove('expanded');
-    }
+function searchWorks(q){
+  q=q.trim().toLowerCase();
+  clearHL();
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  var ab=document.querySelector('.filter-btn[data-theme="all"]');if(ab)ab.classList.add('active');
+  var count=0;
+  document.querySelectorAll('.work-card').forEach(function(c){
+    if(!q){c.classList.remove('hidden');count++;return;}
+    if((c.innerText||'').toLowerCase().includes(q)){c.classList.remove('hidden');hlTitle(c,q);count++;}
+    else{c.classList.add('hidden');c.classList.remove('expanded');}
   });
-
-  const countEl = document.getElementById('search-count');
-  if (countEl) {
-    countEl.textContent = q ? visibleCount + ' work' + (visibleCount !== 1 ? 's' : '') + ' match "' + query + '"' : '';
-  }
-
-  updateYearVisibility();
-  checkNoResults();
+  var sc=document.getElementById('search-count');
+  if(sc)sc.textContent=q?count+' work'+(count!==1?'s':'')+' match "'+document.getElementById('search-input').value+'"':'';
+  updateYears();checkNone();
 }
 
-function highlightInTitle(card, query) {
-  const titleEl = card.querySelector('.work-title');
-  if (!titleEl) return;
-  const text = titleEl.textContent || '';
-  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp('(' + escaped + ')', 'gi');
-  titleEl.innerHTML = text.replace(regex, '<mark class="highlight">$1</mark>');
+function hlTitle(card,q){
+  var el=card.querySelector('.work-title');if(!el)return;
+  var txt=el.textContent||'';
+  var esc=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  el.innerHTML=txt.replace(new RegExp('('+esc+')','gi'),'<mark class="highlight">$1</mark>');
 }
-
-function clearHighlights() {
-  document.querySelectorAll('.work-title').forEach(el => {
-    if (el.querySelector('mark')) {
-      el.textContent = el.textContent;
-    }
+function clearHL(){document.querySelectorAll('.work-title').forEach(function(el){if(el.querySelector('mark'))el.textContent=el.textContent;});}
+function updateYears(){
+  document.querySelectorAll('.tl-year').forEach(function(y){
+    var l=y.nextElementSibling,ct=l?l.nextElementSibling:null;if(!ct)return;
+    var any=Array.from(ct.querySelectorAll('.work-card')).some(function(c){return!c.classList.contains('hidden');});
+    y.style.opacity=any?'1':'0.2';if(l)l.style.opacity=any?'1':'0.2';
   });
 }
-
-function updateYearVisibility() {
-  document.querySelectorAll('.tl-year').forEach(yearEl => {
-    const lineEl = yearEl.nextElementSibling;
-    const contentEl = lineEl ? lineEl.nextElementSibling : null;
-    if (!contentEl) return;
-    const cards = contentEl.querySelectorAll('.work-card');
-    const anyVisible = Array.from(cards).some(c => !c.classList.contains('hidden'));
-    yearEl.style.opaci
+function checkNone(){
+  var any=Array.from(document.querySelectorAll(
