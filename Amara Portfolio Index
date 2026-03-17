@@ -1,0 +1,479 @@
+# Prof. Mahfoud Amara — GitHub Academic Portfolio Platform
+## Complete Concept & Implementation Guide
+
+---
+
+# DELIVERABLE A: Repository Structure (Tree Format)
+
+```
+mahfoud-amara-academic-portfolio/
+│
+├── README.md                          ← Main landing page (homepage)
+├── ABOUT.md                           ← Extended biography & research statement
+├── CV.md                              ← Academic CV (condensed public version)
+├── _config.yml                        ← Jekyll / GitHub Pages configuration
+├── assets/
+│   ├── css/
+│   │   └── style.css                  ← Custom stylesheet
+│   ├── js/
+│   │   └── timeline.js                ← Interactive timeline script
+│   └── images/
+│       └── profile.jpg
+│
+├── works/                             ← Individual work pages (one per publication)
+│   │
+│   ├── 2008-muslim-world-global-sport/
+│   │   ├── README.md                  ← Full work page
+│   │   └── summary.json              ← Structured metadata for index
+│   │
+│   ├── 2007-sport-in-the-muslim-world-houlihan/
+│   │   ├── README.md
+│   │   └── summary.json
+│   │
+│   ├── 2012-veiled-women-beijing-olympics/
+│   │   ├── README.md
+│   │   └── summary.json
+│   │
+│   ├── 2012-sport-politics-arab-world/
+│   │   ├── README.md
+│   │   └── summary.json
+│   │
+│   ├── 2014-sport-political-transition-tunisia/
+│   │   ├── README.md
+│   │   └── summary.json
+│   │
+│   ├── 2016-sport-in-islam-muslim-communities/
+│   │   ├── README.md
+│   │   └── summary.json
+│   │
+│   └── [future works follow same pattern]
+│
+├── themes/                            ← Works organized by research theme
+│   ├── gender-identity-olympics.md
+│   ├── sport-politics-mena.md
+│   ├── islam-sport-west.md
+│   ├── mega-events-gulf.md
+│   └── sport-marketing-islam.md
+│
+├── timeline/
+│   └── README.md                      ← Global chronological timeline (HTML)
+│
+├── concepts/                          ← Key theoretical frameworks explained
+│   ├── soft-power-sport.md
+│   ├── postcolonial-sport.md
+│   ├── orientalism-sport.md
+│   └── sport-nation-building.md
+│
+└── teaching/
+    ├── courses.md
+    └── resources.md
+```
+
+---
+
+# DELIVERABLE B: Example of One Fully Written "Work Page"
+
+**File:** `works/2012-veiled-women-beijing-olympics/README.md`
+
+---
+
+```markdown
+# Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts
+
+**Author:** Mahfoud Amara  
+**Year:** 2012  
+**Journal:** *The International Journal of the History of Sport*, Vol. 29, No. 4, pp. 638–651  
+**Publisher:** Routledge / Taylor & Francis  
+**DOI:** [10.1080/09523367.2012.658194](http://dx.doi.org/10.1080/09523367.2012.658194)  
+**Keywords:** 2008 Beijing Olympics · Hijab · Veiled Muslim women athletes · Identity · Body · Media · Religion
+
+---
+
+## 🌐 Context: Why This Moment Mattered
+
+The 2008 Beijing Olympic Games were the first Olympic Games hosted by a non-Western 
+nation in the new millennium. This context gave the event a particular symbolic weight. 
+It occurred during a historical moment widely described through the lens of "clash of 
+civilisations" (Huntington), "a time of terror" (Borradori), and "geography of fear" 
+(Appadurai).
+
+Against this backdrop, the Games witnessed an unprecedented (relative) increase in the 
+number of veiled Muslim athletes competing internationally — including the Egyptian fencer 
+Shaimaa El Gammal, the Bahraini sprinter Roqaya Al-Ghasara, the Afghan sprinter Robina 
+Muqimyar, and the Iranian rower Homa Hosseini. In total, approximately 14 veiled athletes 
+competed, drawn from Egypt (6), Iran (3), Afghanistan, Oman, Bahrain, the UAE, and Yemen.
+
+This was not an isolated sporting event. It was a discursive battleground for competing 
+global narratives about Islam, gender, modernity, the body, and universal values.
+
+---
+
+## 📌 Key Arguments
+
+### 1. The Hijab as a Multi-Layered Political and Cultural Sign
+The veil in sport is not merely a religious symbol. It is simultaneously:
+- A marker of identity and autonomy for women who wear it by choice
+- A site of contestation for secular feminists, both Western and Arab
+- A tool of state ideology (notably Iran's Islamic Republic)
+- A legal and governance challenge for sport federations
+
+### 2. Western Media: "Clash of Cultures" or Cultural Plurality?
+Western sources (e.g., *Le Temps*, *The Gazette* Montreal, French secular platforms) 
+framed the hijab as incompatible with universal Olympic values — seeing it as an obstacle 
+to women's emancipation. The paper critically examines how the notion of "universal 
+values" is deployed selectively to stigmatise Muslim women's choices.
+
+### 3. Iranian and Arab Press: Empowerment Narrative
+The Iranian press celebrated the visibility of veiled athletes as disproving Western 
+stereotypes, arguing there is no inherent incompatibility between Islamic devotion and 
+elite sporting achievement.
+
+### 4. The "Commercialised Hijab" and Roqaya Al-Ghasara
+Al-Ghasara's Australian-designed "hijood" (hijab + sports hood) generated a separate 
+debate: was her sportswear a genuine Islamic dress or a commercial adaptation? The French 
+magazine *Le Nouvel Observateur* distinguished her outfit from Cathy Freeman's 2000 
+Sydney hood (aerodynamic, not religious). The *Boston Globe* observed it was 
+"traditional in spirit" but commercially branded.
+
+### 5. Chinese Media and the Politics of Inclusion
+The Beijing Organising Committee built a mosque in the Olympic village. *China Daily* 
+framed Al-Ghasara's performance as emblematic of the Games' motto "One World, One Dream," 
+positioning China as a bridge between the Muslim world and the West.
+
+### 6. The Arab Press: Internal Critiques
+Saudi columnist Al-Qaniir used the Olympic moment to critique her own society's 
+restrictions on women's sport in schools, arguing these restrictions were rooted in 
+customs, not Islamic teaching.
+
+---
+
+## 🔑 Why This Paper Matters
+
+| Dimension | Contribution |
+|-----------|-------------|
+| **Methodological** | Comparative multi-lingual media analysis (English, French, Arabic, Chinese sources) |
+| **Theoretical** | Bridges Orientalism, postcolonial theory, feminist studies, and Olympic Studies |
+| **Political** | Challenges both Western secular universalism AND political Islam's restrictions on women |
+| **Empirical** | Documents a specific historical moment — 14 veiled athletes at Beijing 2008 |
+| **Policy** | Informs debates on IOC governance, inclusivity, and dress-code regulations |
+
+---
+
+## 📊 Key Data Point
+
+> 79 women athletes from Arab countries alone competed in the 2008 Beijing Olympics.  
+> 9 out of 205 delegations sent only male athletes — 6 of these were Muslim-majority nations.
+
+---
+
+## 🔗 Connections to Other Works
+
+| Connected Work | Thematic Link |
+|---------------|---------------|
+| [Sport in the Muslim World (2008)](../../works/2008-muslim-world-global-sport/) | Foundational context on Muslim women in sport |
+| [Sport in Islam – Houlihan Chapter (2007)](../../works/2007-sport-in-the-muslim-world-houlihan/) | Islamic jurisprudence on women and sport |
+| [Sport & Political Transition in Tunisia (2014)](../../works/2014-sport-political-transition-tunisia/) | Later extension: Islamists vs. seculars over women's bodies |
+
+---
+
+## 🧩 Theoretical Frameworks Used
+
+- **Edward Said's Orientalism** — critiquing Western media's portrayal of Muslim women as passive/oppressed
+- **Postcolonial theory** — challenging Western universalism in Olympic governance
+- **Feminist theory (multiple positions)** — Western feminist, Arab secular feminist, Islamic feminist
+- **Media discourse analysis** — inductive thematic analysis across multilingual sources
+
+---
+
+## 📖 How to Cite (Chicago)
+
+Amara, Mahfoud. "Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts." 
+*The International Journal of the History of Sport* 29, no. 4 (March 2012): 638–651. 
+https://doi.org/10.1080/09523367.2012.658194.
+
+---
+
+## 🔙 Back to Timeline
+
+[← Return to Global Timeline](../../timeline/) | [← Return to Home](../../README.md)
+
+**Tags:** `#beijing2008` `#hijab` `#gender` `#media-analysis` `#olympics` 
+`#muslim-women` `#orientalism` `#postcolonial` `#IOC`
+```
+
+---
+
+# DELIVERABLE C: Sample README (Homepage)
+
+**File:** `README.md` (root of repository)
+
+---
+
+```markdown
+# Prof. Mahfoud Amara — Academic Portfolio
+
+> *Sport as a lens for understanding power, identity, culture, and society.*
+
+Associate Professor · College of Sport Sciences · Qatar University  
+Specialisation: Sport Management · Sport Policy · Sport Diplomacy · MENA Region
+
+---
+
+## About This Repository
+
+This platform presents a curated, chronological body of scholarly work spanning 
+**2003–present**. It is designed for students, researchers, and policy practitioners 
+interested in:
+
+- The politics of sport in the Arab world and Muslim communities
+- Gender, identity, and the body in Olympic and international sport
+- Mega-events, soft power, and sport diplomacy
+- Islam, secularism, and sporting culture
+
+Each work is presented with its full intellectual context, key arguments, theoretical 
+frameworks, and connections to adjacent scholarship. The goal is not merely to list 
+publications but to narrate the evolution of a research programme.
+
+---
+
+## Quick Navigation
+
+| | |
+|---|---|
+| 📅 [Chronological Timeline](./timeline/) | All works from earliest to most recent |
+| 🗂 [Browse by Theme](./themes/) | Gender · Politics · Islam · Mega-Events · Marketing |
+| 📚 [Key Concepts](./concepts/) | Orientalism · Soft Power · Nation-Building |
+| 🎓 [Teaching Resources](./teaching/) | Courses, syllabi, and reading lists |
+| 👤 [About & CV](./ABOUT.md) | Full academic profile |
+
+---
+
+## Chronological Overview of Works
+
+| Year | Work | Type | Theme |
+|------|------|------|-------|
+| 2003 | Football and National Identity in Algeria | Article | Postcolonialism |
+| 2005 | Qatar 2006 Asian Games: Modernisation from Above | Article | Mega-Events / Gulf |
+| 2007 | Sport in the Muslim World (Houlihan *Sport* textbook) | Book Chapter | Islam / Comparative |
+| 2008 | The Muslim World in the Global Sporting Arena | Article | Global Sport / Islam |
+| 2012 | Veiled Women Athletes in the 2008 Beijing Olympics | Article | Gender / Olympics |
+| 2012 | *Sport, Politics and Society in the Arab World* | Book | Arab Sport |
+| 2014 | Sport and Political Transition in Tunisia | Book Chapter | Islam / Politics |
+| 2016 | *Sport in Islam and in Muslim Communities* (co-ed.) | Edited Book | Islam / Comparative |
+
+---
+
+## Research Themes at a Glance
+
+```
+Sport & Islam ←→ Gender & Body ←→ Olympics & Mega-Events
+       ↕                ↕                    ↕
+Nation-Building ←→ Media & Discourse ←→ Policy & Governance
+       ↕
+MENA / Gulf / Algeria / Tunisia / Morocco
+```
+
+---
+
+## Foundational Argument (Across the Portfolio)
+
+The acceptance of modern sport by Muslim and postcolonial societies is not simply 
+"assimilation" of Western values. It is a complex negotiation between:
+
+- Global norms and local authenticity
+- Secular universalism and Islamic jurisprudence  
+- Colonial legacies and postcolonial agency
+- Western feminist discourse and Muslim women's self-determination
+
+This portfolio traces how these tensions play out across different national contexts, 
+historical moments, and sporting arenas — from the Pan-Arab Games to the FIFA 
+World Cup 2022, from Beijing 2008 to London 2012.
+
+---
+
+## How to Use This Repository
+
+1. **Students:** Start with the [Chronological Timeline](./timeline/) or 
+   the [Key Concepts](./concepts/) pages for theoretical grounding.
+2. **Researchers:** Use [Browse by Theme](./themes/) to find work relevant 
+   to your specialisation.
+3. **Policy practitioners:** See [Works tagged #policy](./themes/sport-politics-mena.md) 
+   for governance and diplomacy applications.
+
+---
+
+*Last updated: 2025 · Qatar University · College of Sport Sciences*
+```
+
+---
+
+# DELIVERABLE D: Tools, Technology, and Implementation Guide
+
+---
+
+## Recommended Stack
+
+### Option 1 — GitHub Pages + Jekyll (Recommended for Full Control)
+
+**What it gives you:**
+- Free hosting on `https://mahfoud-amara.github.io/`
+- Automatic conversion of Markdown files to a navigable website
+- Custom themes and layouts
+- No server required
+
+**Setup steps:**
+1. Create GitHub account and repository named `academic-portfolio`
+2. Go to Settings → Pages → Source: Deploy from branch → `main` → `/root`
+3. Add `_config.yml` (below) to the root of the repository
+4. All `.md` files become web pages automatically
+
+**Minimal `_config.yml`:**
+```yaml
+title: "Prof. Mahfoud Amara | Academic Portfolio"
+description: "Sport, Politics, and Society in the Arab World"
+author: "Mahfoud Amara"
+theme: minima          # or "just-the-docs" for documentation style
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+```
+
+**Recommended Jekyll themes for academic use:**
+- `just-the-docs` — clean, with built-in search and navigation sidebar
+- `minimal-mistakes` — highly customisable, supports author profiles
+- `al-folio` — specifically designed for academics with publication lists
+
+---
+
+### Option 2 — GitHub Pages + MkDocs (Easier, More Modern)
+
+**What it gives you:**
+- Excellent search across all pages
+- Clean, documentation-style layout
+- `mkdocs.yml` for simple navigation configuration
+
+**Setup:** Add `mkdocs.yml` and deploy with GitHub Actions.
+
+---
+
+### Option 3 — Static HTML/CSS (Maximum Design Control)
+
+For the interactive timeline, a single `index.html` file with embedded CSS and JavaScript 
+provides full control. This is the approach described in the HTML prototype below.
+
+---
+
+## Interactive Features Compatible with GitHub Pages
+
+### 1. Chronological Timeline (JavaScript)
+A vertical or horizontal scrollable timeline using pure HTML/CSS/JS. Works without any 
+server-side code. Key works are plotted as nodes; clicking a node opens the work's page.
+
+**Libraries to use (CDN, no installation):**
+- `TimelineJS3` (Northwestern University Knight Lab) — embeds via iframe
+- `vis-timeline` — highly customisable JS library
+
+### 2. Tag/Theme Filtering
+A simple JavaScript filter on the works index page: users click tags like `#gender`, 
+`#olympics`, `#MENA` to filter the list of works.
+
+```html
+<!-- Example filter button -->
+<button onclick="filterWorks('gender')" class="tag-btn">Gender & Identity</button>
+```
+
+### 3. Cross-Work Relationship Map (Optional, Advanced)
+Use `D3.js` (available via CDN) to render a force-directed network graph showing 
+connections between works based on shared themes. Each node = one work; edges = 
+shared theoretical frameworks.
+
+### 4. Embedded Citation Generator
+A `<button>` on each work page that copies the formatted citation (Chicago, APA, 
+or MLA) to the clipboard.
+
+```javascript
+function copyCitation() {
+  navigator.clipboard.writeText(document.getElementById('citation').innerText);
+  alert('Citation copied!');
+}
+```
+
+### 5. Bilingual Support (Arabic/English)
+GitHub Pages supports RTL text via CSS (`direction: rtl`). A toggle button can 
+switch the page between English and Arabic versions.
+
+---
+
+## Visual Design Recommendations
+
+| Element | Recommendation |
+|---------|---------------|
+| **Fonts** | Headings: *Cormorant Garamond* (Google Fonts). Body: *Source Serif 4*. Both are elegant, academic, multilingual-friendly |
+| **Colour palette** | Deep navy (#1a2744) + warm gold (#c9a84c) + white. Conveys academic gravitas; matches Islamic geometric aesthetic |
+| **Timeline style** | Minimalist vertical line with year markers; cards appear on hover/click |
+| **Work cards** | White background, thin left border in gold colour-coded by theme, shadow on hover |
+| **Navigation** | Fixed top navbar + left sidebar (on work pages) showing related works |
+| **Mobile** | All layouts must be responsive; many students access via phone |
+
+---
+
+## SEO and Discoverability
+
+Add this to each work page's front matter (Jekyll):
+```yaml
+---
+title: "Veiled Women Athletes in the 2008 Beijing Olympics"
+date: 2012-04-26
+tags: [gender, olympics, hijab, media, MENA]
+author: Mahfoud Amara
+journal: International Journal of the History of Sport
+doi: "10.1080/09523367.2012.658194"
+---
+```
+
+This enables:
+- Google Scholar indexing
+- Open Graph metadata (for sharing on LinkedIn, ResearchGate)
+- Automatic `sitemap.xml` generation
+
+---
+
+## Suggested Domain Name
+
+Register `mahfoud-amara.com` or `mahfoudamara.net` and point it to GitHub Pages 
+(free custom domain support). This elevates the platform from a repository to a 
+professional scholarly presence.
+
+---
+
+## Phased Implementation Plan
+
+| Phase | Actions | Timeline |
+|-------|---------|---------|
+| **Phase 1 — Foundation** | Create repository, configure GitHub Pages, build README and ABOUT pages | Week 1 |
+| **Phase 2 — Core Works** | Write 5–6 key work pages (one per major publication) | Weeks 2–3 |
+| **Phase 3 — Navigation** | Add theme pages, timeline page, cross-links between works | Week 4 |
+| **Phase 4 — Interactivity** | Add JavaScript timeline, tag filter, citation copier | Week 5 |
+| **Phase 5 — Polish** | Custom CSS, mobile responsiveness, SEO metadata, custom domain | Week 6 |
+| **Phase 6 — Maintenance** | Add new publications as they appear; update annually | Ongoing |
+
+---
+
+## Works Inventory for Platform Population
+
+Based on the uploaded files, the following works are immediately ready for full work-page treatment:
+
+| # | Work | Year | Status |
+|---|------|------|--------|
+| 1 | "The Muslim World in the Global Sporting Arena," *Brown Journal of World Affairs* | 2008 | ✅ Full text available |
+| 2 | "An Introduction to the Study of Sport in the Muslim World," in Houlihan (ed.) *Sport and Society* | 2007 | ✅ Full text available |
+| 3 | "Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts," *IJHS* | 2012 | ✅ Full text available |
+| 4 | "Sport and Political Transition in Tunisia," in Testa & Amara (eds.) *Sport in Islam* | 2014 | ✅ Full text available |
+| 5 | "Islamic Sport Marketing or Sport Marketing in Muslim Cultures?" in Testa & Amara | 2016 | ✅ Full text available |
+| 6 | *Sport in Islam and in Muslim Communities* (co-edited with Alberto Testa, Routledge) | 2016 | ✅ Metadata available |
+| 7 | *Sport, Politics and Society in the Arab World* (Palgrave Macmillan) | 2012 | ✅ Listed in sources |
+
+---
+
+*End of Platform Concept Document*  
+*Prepared for Prof. Mahfoud Amara — Qatar University, College of Sport Sciences*
