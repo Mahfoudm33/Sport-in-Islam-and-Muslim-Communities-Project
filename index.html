@@ -51,13 +51,29 @@
     padding: 0 2rem;
     height: 64px;
   }
+  .logo-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+  }
+  .logo-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
   .logo {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--gold-light);
     letter-spacing: 0.02em;
     text-decoration: none;
+    line-height: 1.2;
   }
   .logo span { color: rgba(255,255,255,0.5); font-weight: 300; }
   nav { display: flex; gap: 0; }
@@ -618,7 +634,44 @@
     font-style: italic;
     font-size: 0.95rem;
   }
-  .no-results.visible { display: block; }
+  /* ── PUBLICATION ILLUSTRATIONS ── */
+  .pub-illustration {
+    width: 100%;
+    height: 140px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    margin: -1.25rem -1.5rem 1rem -1.5rem;
+    width: calc(100% + 3rem);
+    overflow: hidden;
+    position: relative;
+    background: var(--navy);
+  }
+  .pub-illustration svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .pub-illustration .pub-year-overlay {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.85rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.12);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+  .pub-illustration .pub-type-overlay {
+    position: absolute;
+    bottom: 0.6rem;
+    left: 0.85rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
@@ -632,12 +685,15 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a class="logo" href="#">Sport in Islam and Muslim Communities <span>· Project</span></a>
+    <div class="logo-block">
+      <div class="logo-name">Dr Mahfoud Amara</div>
+      <a class="logo" href="#">Sport in Islam and Muslim Communities <span>· Project</span></a>
+    </div>
     <nav>
-      <a href="#timeline" class="active">Timeline</a>
-      <a href="#themes">Themes</a>
-      <a href="#concepts">Concepts</a>
-      <a href="#about">About</a>
+      <a href="#timeline" id="nav-timeline" class="active">Timeline</a>
+      <a href="#timeline" onclick="filterWorks('all', null); document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); document.querySelector('[data-theme=all]').classList.add('active'); return false;">All Works</a>
+      <a href="#timeline" onclick="window.open('https://www.qu.edu.qa','_blank'); return false;">Qatar University</a>
+      <a href="mailto:m.amara@qu.edu.qa">Contact</a>
     </nav>
   </div>
 </header>
@@ -725,7 +781,25 @@
     <div class="tl-content">
       <div class="work-card" data-theme="politics" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Journal Article (co-authored with Ian P. Henry)</div>
+        <!-- Illustration: football field lines + Algerian crescent motif -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a2744 0%,#2d4a1e 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- pitch lines -->
+            <rect x="60" y="20" width="300" height="100" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+            <line x1="210" y1="20" x2="210" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <circle cx="210" cy="70" r="30" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <rect x="60" y="45" width="45" height="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <rect x="315" y="45" width="45" height="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- football -->
+            <circle cx="210" cy="70" r="12" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+            <path d="M204 62 l6-4 6 4 2 7-4 5h-8l-4-5z" fill="rgba(30,50,30,0.6)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+            <!-- Algerian crescent -->
+            <path d="M340 35 a20 20 0 1 1 0 40 a15 15 0 1 0 0-40z" fill="rgba(201,168,76,0.35)" stroke="rgba(201,168,76,0.6)" stroke-width="1"/>
+            <polygon points="367,52 369,58 375,58 370,62 372,68 367,64 362,68 364,62 359,58 365,58" fill="rgba(201,168,76,0.5)"/>
+          </svg>
+          <div class="pub-year-overlay">2004</div>
+          <div class="pub-type-overlay">Soccer &amp; Society · Routledge</div>
+        </div>
         <div class="work-title">Between Globalization and Local 'Modernity': The Diffusion and Modernization of Football in Algeria</div>
         <div class="work-venue"><em>Soccer &amp; Society</em>, Vol. 5, No. 1 (2004), pp. 1–26 · Routledge / Taylor &amp; Francis</div>
         <div class="work-tags">
@@ -755,8 +829,32 @@
     <div class="tl-content">
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Book Chapter</div>
-        <div class="work-title">An Introduction to the Study of Sport in the Muslim World</div>
+        <!-- Illustration: open book, crescent, globe motif -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#0f2030 0%,#1a3a2a 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- open book -->
+            <path d="M130 30 L130 110 Q170 100 210 110 Q250 100 290 110 L290 30 Q250 40 210 30 Q170 40 130 30z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <line x1="210" y1="30" x2="210" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <!-- text lines on pages -->
+            <line x1="145" y1="50" x2="200" y2="52" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="145" y1="62" x2="200" y2="64" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="145" y1="74" x2="195" y2="76" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="145" y1="86" x2="200" y2="88" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="220" y1="50" x2="275" y2="52" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="220" y1="62" x2="275" y2="64" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="220" y1="74" x2="270" y2="76" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="220" y1="86" x2="275" y2="88" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <!-- crescent and star -->
+            <path d="M350 40 a22 22 0 1 1 0 44 a17 17 0 1 0 0-44z" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="1.5"/>
+            <polygon points="362,58 364,65 371,65 365,69 368,76 362,72 356,76 359,69 353,65 360,65" fill="rgba(201,168,76,0.55)"/>
+            <!-- globe hint -->
+            <circle cx="70" cy="70" r="30" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <ellipse cx="70" cy="70" rx="12" ry="30" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <line x1="40" y1="70" x2="100" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+          </svg>
+          <div class="pub-year-overlay">2007</div>
+          <div class="pub-type-overlay">Sage · Sport and Society Textbook</div>
+        </div>
         <div class="work-venue">In Houlihan (ed.), <em>Sport and Society: A Student Introduction</em> (2nd ed.), Sage · pp. 532–552</div>
         <div class="work-tags">
           <span class="work-tag">#Islam</span><span class="work-tag">#Muslim-world</span>
@@ -778,8 +876,28 @@
     <div class="tl-content">
       <div class="work-card" data-theme="politics" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Journal Article</div>
-        <div class="work-title">The Muslim World in the Global Sporting Arena</div>
+        <!-- Illustration: world map silhouette, connecting arcs -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#0f1928 0%,#1a2744 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- simplified world landmass hints -->
+            <ellipse cx="140" cy="68" rx="55" ry="38" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <ellipse cx="260" cy="62" rx="40" ry="30" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <ellipse cx="330" cy="80" rx="28" ry="20" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- connection arcs between regions -->
+            <path d="M140 68 Q200 20 260 62" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M260 62 Q295 50 330 80" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1" stroke-dasharray="3 3"/>
+            <path d="M140 68 Q150 110 260 62" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3 4"/>
+            <!-- dots at intersections -->
+            <circle cx="140" cy="68" r="4" fill="var(--gold)" opacity="0.8"/>
+            <circle cx="260" cy="62" r="4" fill="var(--gold)" opacity="0.8"/>
+            <circle cx="330" cy="80" r="3" fill="rgba(201,168,76,0.7)"/>
+            <!-- Brown University label hint -->
+            <rect x="20" y="100" width="90" height="22" rx="3" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+            <text x="65" y="115" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-size="9" font-family="serif" letter-spacing="1">BROWN JOURNAL</text>
+          </svg>
+          <div class="pub-year-overlay">2008</div>
+          <div class="pub-type-overlay">Brown Journal of World Affairs</div>
+        </div>
         <div class="work-venue"><em>Brown Journal of World Affairs</em>, Vol. XIV, Issue 2, pp. 67–75 (Spring/Summer 2008)</div>
         <div class="work-tags">
           <span class="work-tag">#Muslim-world</span><span class="work-tag">#postcolonialism</span>
@@ -801,8 +919,25 @@
     <div class="tl-content">
       <div class="work-card" data-theme="gender" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Journal Article · Peer-Reviewed</div>
-        <div class="work-title">Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts</div>
+        <!-- Illustration: Olympic rings abstraction, veil silhouette, Beijing motif -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a1a2e 0%,#4a1a3a 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- Olympic rings (5 abstract circles) -->
+            <circle cx="140" cy="60" r="22" fill="none" stroke="rgba(100,180,255,0.5)" stroke-width="2.5"/>
+            <circle cx="178" cy="60" r="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2.5"/>
+            <circle cx="216" cy="60" r="22" fill="none" stroke="rgba(220,50,50,0.5)" stroke-width="2.5"/>
+            <circle cx="254" cy="60" r="22" fill="none" stroke="rgba(255,220,0,0.5)" stroke-width="2.5"/>
+            <circle cx="292" cy="60" r="22" fill="none" stroke="rgba(0,160,80,0.5)" stroke-width="2.5"/>
+            <!-- runner silhouette wearing hijab -->
+            <path d="M340 110 Q342 90 350 80 Q355 72 360 70 Q368 68 372 72 Q376 66 380 64 Q388 60 390 68 Q388 74 382 76 L378 90 Q375 105 370 112 Z" fill="rgba(201,168,76,0.45)" stroke="rgba(201,168,76,0.6)" stroke-width="1"/>
+            <!-- hijab arc -->
+            <path d="M360 70 Q368 60 380 64" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.5"/>
+            <!-- Beijing 2008 hint -->
+            <text x="50" y="110" fill="rgba(255,255,255,0.12)" font-size="28" font-family="serif" letter-spacing="2">北京</text>
+          </svg>
+          <div class="pub-year-overlay">2012</div>
+          <div class="pub-type-overlay">Int. Journal of the History of Sport · Routledge</div>
+        </div>
         <div class="work-venue"><em>International Journal of the History of Sport</em>, Vol. 29, No. 4, pp. 638–651 · DOI: 10.1080/09523367.2012.658194</div>
         <div class="work-tags">
           <span class="work-tag">#Beijing2008</span><span class="work-tag">#hijab</span>
@@ -825,8 +960,30 @@
     <div class="tl-content">
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)" style="margin-bottom:1rem">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Journal Article · Open Access · Peer-Reviewed</div>
-        <div class="work-title">Sport, Islam, and Muslims in Europe: In Between or on the Margin?</div>
+        <!-- Illustration: Eiffel Tower, crescent, identity layers -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a1a2e 0%,#2a1a0e 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- Eiffel tower silhouette -->
+            <path d="M180 115 L188 70 L192 50 L196 42 L200 42 L204 50 L208 70 L216 115Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="184" y1="82" x2="212" y2="82" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <line x1="186" y1="92" x2="210" y2="92" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- crescent moon -->
+            <path d="M270 35 a25 25 0 1 1 0 50 a19 19 0 1 0 0-50z" fill="rgba(201,168,76,0.3)" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+            <!-- identity layers as concentric arcs -->
+            <path d="M60 115 Q100 60 140 55" fill="none" stroke="rgba(201,168,76,0.35)" stroke-width="1.5" stroke-dasharray="5 3"/>
+            <path d="M60 115 Q100 80 140 78" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
+            <path d="M60 115 Q100 95 140 95" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3 5"/>
+            <!-- label dots -->
+            <circle cx="140" cy="55" r="3" fill="rgba(201,168,76,0.8)"/>
+            <circle cx="140" cy="78" r="3" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="140" cy="95" r="3" fill="rgba(255,255,255,0.25)"/>
+            <text x="148" y="58" fill="rgba(201,168,76,0.65)" font-size="8" font-family="serif">Muslim</text>
+            <text x="148" y="81" fill="rgba(255,255,255,0.4)" font-size="8" font-family="serif">European</text>
+            <text x="148" y="98" fill="rgba(255,255,255,0.25)" font-size="8" font-family="serif">Citizen</text>
+          </svg>
+          <div class="pub-year-overlay">2013</div>
+          <div class="pub-type-overlay">Religions · MDPI · Open Access</div>
+        </div>
         <div class="work-venue"><em>Religions</em> (MDPI), Vol. 4, No. 4, pp. 644–656 · Published 10 December 2013 · DOI: 10.3390/rel4040644</div>
         <div class="work-tags">
           <span class="work-tag">#Islam</span><span class="work-tag">#Europe</span>
@@ -845,8 +1002,34 @@
 
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Book Chapter (co-authored with Ian P. Henry)</div>
-        <div class="work-title">Deconstructing the Debate around Sport and the 'Question' of 'Muslim Minorities' in the West</div>
+        <!-- Illustration: UK cityscape dots, community network -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#101825 0%,#1a2530 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- city skyline silhouette -->
+            <rect x="40" y="85" width="15" height="35" fill="rgba(255,255,255,0.06)"/>
+            <rect x="60" y="70" width="20" height="50" fill="rgba(255,255,255,0.07)"/>
+            <rect x="85" y="78" width="12" height="42" fill="rgba(255,255,255,0.06)"/>
+            <rect x="100" y="60" width="25" height="60" fill="rgba(255,255,255,0.08)"/>
+            <rect x="130" y="72" width="18" height="48" fill="rgba(255,255,255,0.06)"/>
+            <!-- community network nodes -->
+            <circle cx="260" cy="45" r="6" fill="rgba(201,168,76,0.7)"/>
+            <circle cx="300" cy="70" r="5" fill="rgba(201,168,76,0.6)"/>
+            <circle cx="340" cy="50" r="5" fill="rgba(201,168,76,0.6)"/>
+            <circle cx="320" cy="95" r="4" fill="rgba(201,168,76,0.5)"/>
+            <circle cx="370" cy="80" r="4" fill="rgba(201,168,76,0.5)"/>
+            <circle cx="280" cy="95" r="3" fill="rgba(201,168,76,0.4)"/>
+            <!-- connecting lines -->
+            <line x1="260" y1="45" x2="300" y2="70" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+            <line x1="300" y1="70" x2="340" y2="50" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+            <line x1="300" y1="70" x2="320" y2="95" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+            <line x1="340" y1="50" x2="370" y2="80" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+            <line x1="320" y1="95" x2="280" y2="95" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+            <!-- Leicester / Birmingham label -->
+            <text x="215" y="125" fill="rgba(255,255,255,0.18)" font-size="9" font-family="serif" letter-spacing="1">Leicester · Birmingham</text>
+          </svg>
+          <div class="pub-year-overlay">2013</div>
+          <div class="pub-type-overlay">Palgrave Macmillan · Islam in the West</div>
+        </div>
         <div class="work-venue">In Farrar, Robinson, Vallic &amp; Wetherly (eds.), <em>Islam in the West: Key Issues in Multiculturalism</em>, Palgrave Macmillan (2012), pp. 138–153</div>
         <div class="work-tags">
           <span class="work-tag">#Muslim-minorities</span><span class="work-tag">#sport-welfare</span>
@@ -867,8 +1050,31 @@
     <div class="tl-content">
       <div class="work-card" data-theme="politics" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Book Chapter</div>
-        <div class="work-title">Sport and Political Transition in Tunisia: Another Terrain of Competition Between Islamists and Seculars</div>
+        <!-- Illustration: Tunisian flag motif, stadium, protest wave -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a0a0a 0%,#2a1a1a 60%,#1a2a1a 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- stadium arc -->
+            <path d="M80 120 Q210 30 340 120" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+            <path d="M95 120 Q210 45 325 120" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+            <path d="M110 120 Q210 58 310 120" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <!-- crowd dots along stadium arc -->
+            <circle cx="130" cy="99" r="2" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="155" cy="80" r="2" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="180" cy="66" r="2" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="210" cy="58" r="2.5" fill="rgba(201,168,76,0.8)"/>
+            <circle cx="240" cy="66" r="2" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="265" cy="80" r="2" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="290" cy="99" r="2" fill="rgba(255,255,255,0.3)"/>
+            <!-- Tunisian crescent and star -->
+            <circle cx="370" cy="45" r="20" fill="rgba(180,20,20,0.3)" stroke="rgba(220,60,60,0.5)" stroke-width="1"/>
+            <path d="M362 38 a10 10 0 1 1 0 14 a7.5 7.5 0 1 0 0-14z" fill="rgba(255,255,255,0.4)"/>
+            <polygon points="375,41 377,46 382,46 378,49 380,54 375,51 370,54 372,49 368,46 373,46" fill="rgba(255,255,255,0.45)" transform="scale(0.7) translate(165,20)"/>
+            <!-- protest wave -->
+            <path d="M40 100 Q80 85 120 100 Q160 115 200 100 Q240 85 280 100" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          </svg>
+          <div class="pub-year-overlay">2014</div>
+          <div class="pub-type-overlay">Routledge · Sport in Islam</div>
+        </div>
         <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016) · pp. [Chapter 7]</div>
         <div class="work-tags">
           <span class="work-tag">#Tunisia</span><span class="work-tag">#Arab-Spring</span>
@@ -890,8 +1096,37 @@
     <div class="tl-content">
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)" style="margin-bottom:1rem">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Edited Book · Routledge</div>
-        <div class="work-title">Sport in Islam and in Muslim Communities (co-edited with Alberto Testa)</div>
+        <!-- Illustration: book cover motif, globe with multiple flags/pins -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#0a1520 0%,#1a2a3a 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- book spine -->
+            <rect x="60" y="20" width="18" height="105" rx="2" fill="rgba(201,168,76,0.25)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+            <!-- book pages fan -->
+            <rect x="78" y="22" width="80" height="101" rx="1" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="78" y1="40" x2="158" y2="40" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <line x1="78" y1="55" x2="158" y2="55" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <line x1="78" y1="70" x2="158" y2="70" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <line x1="78" y1="85" x2="158" y2="85" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <line x1="78" y1="100" x2="158" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+            <!-- Routledge text on spine -->
+            <text x="69" y="110" fill="rgba(201,168,76,0.6)" font-size="7" font-family="serif" writing-mode="tb">ROUTLEDGE</text>
+            <!-- world pins for multinational scope -->
+            <circle cx="240" cy="70" r="35" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <ellipse cx="240" cy="70" rx="14" ry="35" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <line x1="205" y1="70" x2="275" y2="70" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+            <!-- country pins -->
+            <circle cx="230" cy="55" r="3" fill="rgba(201,168,76,0.8)"/>
+            <circle cx="255" cy="65" r="3" fill="rgba(201,168,76,0.7)"/>
+            <circle cx="225" cy="80" r="3" fill="rgba(201,168,76,0.7)"/>
+            <circle cx="248" cy="85" r="2.5" fill="rgba(201,168,76,0.6)"/>
+            <circle cx="238" cy="50" r="2.5" fill="rgba(201,168,76,0.6)"/>
+            <!-- contributor dots -->
+            <text x="300" y="45" fill="rgba(255,255,255,0.2)" font-size="8" font-family="serif">14 contributors</text>
+            <text x="300" y="58" fill="rgba(255,255,255,0.15)" font-size="8" font-family="serif">8 countries</text>
+          </svg>
+          <div class="pub-year-overlay">2016</div>
+          <div class="pub-type-overlay">Routledge · Edited Volume</div>
+        </div>
         <div class="work-venue">Routledge, London (2016) · Series: Routledge Research in Sport, Culture and Society, No. 50</div>
         <div class="work-tags">
           <span class="work-tag">#edited-volume</span><span class="work-tag">#Islam</span>
@@ -908,8 +1143,31 @@
 
       <div class="work-card" data-theme="marketing" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Book Chapter (co-authored with Guillaume Bodet)</div>
-        <div class="work-title">Islamic Sport Marketing or Sport Marketing in Muslim Countries and Communities</div>
+        <!-- Illustration: halal/haram scales, brand logos abstracted, crescent -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a1a10 0%,#2a2a10 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- balance scales -->
+            <line x1="210" y1="25" x2="210" y2="115" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <line x1="155" y1="55" x2="265" y2="55" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <!-- left pan -->
+            <path d="M140 55 Q155 80 170 55" fill="none" stroke="rgba(201,168,76,0.6)" stroke-width="1.5"/>
+            <text x="155" y="75" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-size="9" font-family="serif">حلال</text>
+            <!-- right pan (tilted slightly lower = haram heavier) -->
+            <path d="M250 65 Q265 90 280 65" fill="none" stroke="rgba(180,60,60,0.6)" stroke-width="1.5"/>
+            <text x="265" y="85" text-anchor="middle" fill="rgba(200,80,80,0.7)" font-size="9" font-family="serif">حرام</text>
+            <!-- brand abstraction circles -->
+            <circle cx="80" cy="45" r="18" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <text x="80" y="49" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="9" font-family="serif">Brand</text>
+            <circle cx="340" cy="45" r="18" fill="rgba(255,255,255,0.04)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+            <text x="340" y="49" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="9" font-family="serif">Market</text>
+            <!-- connecting dotted line -->
+            <line x1="98" y1="45" x2="322" y2="45" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
+            <!-- sponsor jersey shape -->
+            <path d="M75 90 L80 80 L90 83 L95 78 L100 78 L105 83 L115 80 L120 90 L115 115 L80 115 Z" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          </svg>
+          <div class="pub-year-overlay">2016</div>
+          <div class="pub-type-overlay">Routledge · Sport Marketing</div>
+        </div>
         <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
         <div class="work-tags">
           <span class="work-tag">#halal-marketing</span><span class="work-tag">#sport-marketing</span>
@@ -931,8 +1189,31 @@
     <div class="tl-content">
       <div class="work-card" data-theme="islam" onclick="toggleCard(this)">
         <button class="expand-btn" onclick="event.stopPropagation(); toggleCard(this.parentElement)">+</button>
-        <div class="work-type">Article (co-auteur : Youcef Bouandel, Université du Qatar)</div>
-        <div class="work-title">La Coupe du monde 2022 de la FIFA, entre football et foi</div>
+        <!-- Illustration: Qatar skyline, football, faith motifs -->
+        <div class="pub-illustration" style="background:linear-gradient(135deg,#1a0a0a 0%,#3a1a0a 50%,#1a1a2a 100%)">
+          <svg viewBox="0 0 420 140" preserveAspectRatio="xMidYMid slice">
+            <!-- Doha skyline silhouette -->
+            <rect x="40" y="75" width="10" height="50" fill="rgba(255,255,255,0.07)"/>
+            <rect x="55" y="60" width="12" height="65" fill="rgba(255,255,255,0.08)"/>
+            <rect x="72" y="50" width="8" height="75" fill="rgba(255,255,255,0.06)"/>
+            <path d="M84 45 L88 50 L84 55 L84 125 L100 125 L100 50 L96 50 Z" fill="rgba(255,255,255,0.07)"/>
+            <rect x="105" y="65" width="14" height="60" fill="rgba(255,255,255,0.06)"/>
+            <rect x="124" y="78" width="10" height="47" fill="rgba(255,255,255,0.05)"/>
+            <!-- FIFA World Cup trophy abstraction -->
+            <path d="M220 35 L228 35 L230 55 Q235 65 228 72 L220 72 Q213 65 218 55 Z" fill="rgba(201,168,76,0.35)" stroke="rgba(201,168,76,0.6)" stroke-width="1"/>
+            <rect x="221" y="72" width="7" height="8" fill="rgba(201,168,76,0.4)"/>
+            <rect x="217" y="80" width="15" height="4" rx="1" fill="rgba(201,168,76,0.35)"/>
+            <!-- football -->
+            <circle cx="310" cy="70" r="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+            <path d="M300 58 l10-5 10 5 4 12-7 9h-14l-7-9z" fill="rgba(30,30,30,0.5)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+            <!-- Qatar crescent -->
+            <path d="M360 30 a18 18 0 1 1 0 36 a14 14 0 1 0 0-36z" fill="rgba(130,0,0,0.5)" stroke="rgba(200,60,60,0.6)" stroke-width="1"/>
+            <!-- Ramadan crescent moon (thin) -->
+            <path d="M165 25 a12 12 0 1 1 0 24 a9 9 0 1 0 0-24z" fill="none" stroke="rgba(201,168,76,0.55)" stroke-width="1.5"/>
+          </svg>
+          <div class="pub-year-overlay">2022</div>
+          <div class="pub-type-overlay">Qatar University · Football &amp; Faith</div>
+        </div>
         <div class="work-venue">Mahfoud Amara &amp; Youcef Bouandel · Qatar University · 2022</div>
         <div class="work-tags">
           <span class="work-tag">#Qatar2022</span><span class="work-tag">#Islam</span>
@@ -959,7 +1240,7 @@
 <!-- FOOTER -->
 <footer>
   <p>Prof. Mahfoud Amara · Qatar University, College of Sport Sciences · 
-  <a href="/cdn-cgi/l/email-protection#5a37743b373b283b1a2b2f743f3e2f742b3b"><span class="__cf_email__" data-cfemail="076a29666a66756647767229626372297666">[email&#160;protected]</span></a> · 
+  <a href="/cdn-cgi/l/email-protection#1d70337c707c6f7c5d6c6833787968336c7c"><span class="__cf_email__" data-cfemail="c9a4e7a8a4a8bba889b8bce7acadbce7b8a8">[email&#160;protected]</span></a> · 
   <a href="#">ResearchGate</a> · <a href="#">ORCID</a></p>
   <p style="margin-top:0.5rem; font-size:0.74rem; opacity:0.6;">
     This platform is built with GitHub Pages + Markdown. 
@@ -967,7 +1248,7 @@
   </p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* VISITOR COUNTER */
 (function() {
   try {
@@ -1176,10 +1457,4 @@ function updateYearVisibility() {
 }
 
 function checkNoResults() {
-  const anyVisible = Array.from(document.querySelectorAll('.work-card')).some(c => !c.classList.contains('hidden'));
-  const msg = document.getElementById('no-results');
-  if (msg) msg.classList.toggle('visible', !anyVisible);
-}
-</script>
-</body>
-</html>
+  const anyVisi
