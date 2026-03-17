@@ -430,13 +430,204 @@
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes slideDown {
+    from { opacity: 0; max-height: 0; transform: translateY(-6px); }
+    to { opacity: 1; max-height: 2000px; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .work-card { animation: fadeUp 0.4s ease both; }
   .work-card:nth-child(1) { animation-delay: 0.05s; }
   .work-card:nth-child(2) { animation-delay: 0.1s; }
   .work-card:nth-child(3) { animation-delay: 0.15s; }
+
+  /* ── CLICK HINT ── */
+  .click-hint {
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: opacity 0.2s;
+  }
+  .click-hint::before {
+    content: '';
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 2v6M2 5l3 3 3-3' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/10px no-repeat;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .work-card.expanded .click-hint::before {
+    transform: rotate(180deg);
+  }
+  .work-card.expanded .click-hint { color: var(--text-muted); }
+
+  /* ── SMOOTH EXPAND PANEL ── */
+  .work-abstract {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.65;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+  }
+  .work-card.expanded .work-abstract {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top-color: var(--stone);
+    animation: slideDown 0.4s ease;
+  }
+
+  /* ── READING TIME BADGE ── */
+  .read-time {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--stone);
+    padding: 0.15rem 0.55rem;
+    border-radius: 100px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* ── COPY CITATION BUTTON ── */
+  .cite-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: white;
+    border: 1px solid var(--stone);
+    border-radius: 4px;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.18s;
+    margin-top: 1rem;
+  }
+  .cite-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+  .cite-btn.copied { background: #2d7a6e; color: white; border-color: #2d7a6e; }
+  .cite-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap {
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .search-input {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    width: 100%;
+    padding: 0.65rem 1rem 0.65rem 2.5rem;
+    border: 1px solid var(--stone);
+    border-radius: var(--radius);
+    background: white;
+    color: var(--text);
+    transition: border-color 0.18s, box-shadow 0.18s;
+    outline: none;
+  }
+  .search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+  .search-icon {
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: 14px;
+  }
+  .search-count {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    font-style: italic;
+    min-height: 1.2em;
+  }
+  .highlight { background: #fff3b0; border-radius: 2px; padding: 0 2px; }
+
+  /* ── VISITOR COUNTER ── */
+  .visitor-stat {
+    animation: countUp 0.6s ease 0.3s both;
+  }
+
+  /* ── READING PROGRESS BAR ── */
+  #reading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* ── SCROLL TO TOP ── */
+  #scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px; height: 44px;
+    background: var(--navy);
+    color: var(--gold-light);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 16px rgba(15,25,40,0.35);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 150;
+  }
+  #scroll-top.visible { opacity: 1; transform: translateY(0); }
+  #scroll-top:hover { background: var(--gold); color: var(--navy-deep); }
+
+  /* ── NO-RESULTS MESSAGE ── */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+  .no-results.visible { display: block; }
 </style>
 </head>
 <body>
+
+<!-- Reading progress bar -->
+<div id="reading-bar"></div>
+
+<!-- Scroll to top -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 
 <!-- HEADER -->
 <header>
@@ -485,6 +676,10 @@
         <div class="stat-num">3</div>
         <div class="stat-label">Books (author / co-editor)</div>
       </div>
+      <div class="stat-card visitor-stat">
+        <div class="stat-num" id="visitor-count">—</div>
+        <div class="stat-label">Page Visits (this browser)</div>
+      </div>
     </div>
   </div>
 </section>
@@ -503,6 +698,13 @@
     <div class="legend-item"><div class="legend-dot" style="background:#2d7a6e"></div> Islam &amp; Sport</div>
     <div class="legend-item"><div class="legend-dot" style="background:#3a5c8a"></div> Politics &amp; Nation-Building</div>
     <div class="legend-item"><div class="legend-dot" style="background:#6a6a2a"></div> Marketing &amp; Commerce</div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" id="search-input" placeholder="Search by title, keyword, theme, year…" oninput="searchWorks(this.value)">
+    <div class="search-count" id="search-count"></div>
   </div>
 
   <!-- FILTERS -->
@@ -750,6 +952,8 @@
 
   </div><!-- end timeline -->
 
+  <div class="no-results" id="no-results">No works match your search. Try different keywords or clear the search field.</div>
+
 </main>
 
 <!-- FOOTER -->
@@ -763,40 +967,219 @@
   </p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  function toggleCard(card) {
-    const isExpanded = card.classList.contains('expanded');
-    // Close all
-    document.querySelectorAll('.work-card.expanded').forEach(c => {
+<script>
+/* VISITOR COUNTER */
+(function() {
+  try {
+    const key = 'simc_visits';
+    let count = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+    localStorage.setItem(key, count);
+    const el = document.getElementById('visitor-count');
+    if (el) {
+      let start = 0, end = count;
+      const step = Math.max(1, Math.ceil(end / 30));
+      const timer = setInterval(() => {
+        start = Math.min(start + step, end);
+        el.textContent = start.toLocaleString();
+        if (start >= end) clearInterval(timer);
+      }, 20);
+    }
+  } catch(e) {}
+})();
+
+/* READING PROGRESS BAR */
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+  const bar = document.getElementById('reading-bar');
+  if (bar) bar.style.width = Math.min(100, scrolled * 100) + '%';
+  const btn = document.getElementById('scroll-top');
+  if (btn) {
+    if (doc.scrollTop > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  }
+});
+
+/* INJECT CLICK HINTS, READING TIME, CITE BUTTONS */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.work-card').forEach(card => {
+    const abstract = card.querySelector('.work-abstract');
+    const wordCount = abstract ? abstract.innerText.trim().split(/\s+/).length : 0;
+    const mins = Math.max(1, Math.round(wordCount / 200));
+
+    // Reading time badge
+    const typeEl = card.querySelector('.work-type');
+    if (typeEl) {
+      const badge = document.createElement('span');
+      badge.className = 'read-time';
+      badge.textContent = mins + ' min read';
+      typeEl.appendChild(badge);
+    }
+
+    // Click hint
+    const tagsEl = card.querySelector('.work-tags');
+    if (tagsEl) {
+      const hint = document.createElement('div');
+      hint.className = 'click-hint';
+      hint.textContent = 'Click to read summary';
+      tagsEl.after(hint);
+    }
+
+    // Copy citation button
+    if (abstract) {
+      const title = (card.querySelector('.work-title')?.innerText || '').trim();
+      const venue = (card.querySelector('.work-venue')?.innerText || '').trim();
+      const citation = title + '. ' + venue;
+
+      const btn = document.createElement('button');
+      btn.className = 'cite-btn';
+      btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0"><rect x="2" y="4" width="10" height="11" rx="1"/><path d="M5 4V3a1 1 0 011-1h7a1 1 0 011 1v9a1 1 0 01-1 1h-1"/></svg> Copy citation';
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(citation).then(() => {
+            btn.textContent = '\u2713 Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="width:12px;height:12px;flex-shrink:0"><rect x="2" y="4" width="10" height="11" rx="1"/><path d="M5 4V3a1 1 0 011-1h7a1 1 0 011 1v9a1 1 0 01-1 1h-1"/></svg> Copy citation';
+              btn.classList.remove('copied');
+            }, 2000);
+          });
+        } else {
+          btn.textContent = citation.slice(0, 70) + '...';
+          setTimeout(() => { btn.innerHTML = 'Copy citation'; }, 3000);
+        }
+      });
+      abstract.appendChild(btn);
+    }
+  });
+});
+
+/* TOGGLE CARD */
+function toggleCard(card) {
+  const isExpanded = card.classList.contains('expanded');
+
+  document.querySelectorAll('.work-card.expanded').forEach(c => {
+    if (c !== card) {
       c.classList.remove('expanded');
+      const hint = c.querySelector('.click-hint');
+      if (hint) hint.textContent = 'Click to read summary';
       const btn = c.querySelector('.expand-btn');
       if (btn) btn.textContent = '+';
-    });
-    // Open clicked (unless it was already open)
-    if (!isExpanded) {
-      card.classList.add('expanded');
-      const btn = card.querySelector('.expand-btn');
-      if (btn) btn.textContent = '−';
     }
+  });
+
+  if (!isExpanded) {
+    card.classList.add('expanded');
+    const hint = card.querySelector('.click-hint');
+    if (hint) hint.textContent = 'Click to collapse';
+    const btn = card.querySelector('.expand-btn');
+    if (btn) btn.textContent = '\u2212';
+    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+  } else {
+    card.classList.remove('expanded');
+    const hint = card.querySelector('.click-hint');
+    if (hint) hint.textContent = 'Click to read summary';
+    const btn = card.querySelector('.expand-btn');
+    if (btn) btn.textContent = '+';
+  }
+}
+
+/* FILTER */
+function filterWorks(theme, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) searchInput.value = '';
+  const countEl = document.getElementById('search-count');
+  if (countEl) countEl.textContent = '';
+  clearHighlights();
+
+  document.querySelectorAll('.work-card').forEach(card => {
+    if (theme === 'all' || card.dataset.theme === theme) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+      card.classList.remove('expanded');
+    }
+  });
+
+  updateYearVisibility();
+  checkNoResults();
+}
+
+/* SEARCH */
+function searchWorks(query) {
+  const q = query.trim().toLowerCase();
+  const cards = document.querySelectorAll('.work-card');
+  let visibleCount = 0;
+
+  clearHighlights();
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  const allBtn = document.querySelector('.filter-btn[data-theme="all"]');
+  if (allBtn) allBtn.classList.add('active');
+
+  cards.forEach(card => {
+    if (!q) {
+      card.classList.remove('hidden');
+      visibleCount++;
+      return;
+    }
+    const searchText = (card.innerText || '').toLowerCase();
+    if (searchText.includes(q)) {
+      card.classList.remove('hidden');
+      highlightInTitle(card, query);
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+      card.classList.remove('expanded');
+    }
+  });
+
+  const countEl = document.getElementById('search-count');
+  if (countEl) {
+    countEl.textContent = q ? visibleCount + ' work' + (visibleCount !== 1 ? 's' : '') + ' match "' + query + '"' : '';
   }
 
-  function filterWorks(theme, btn) {
-    // Update buttons
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
+  updateYearVisibility();
+  checkNoResults();
+}
 
-    // Filter cards
-    document.querySelectorAll('.work-card').forEach(card => {
-      if (theme === 'all' || card.dataset.theme === theme) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-        card.classList.remove('expanded');
-      }
-    });
+function highlightInTitle(card, query) {
+  const titleEl = card.querySelector('.work-title');
+  if (!titleEl) return;
+  const text = titleEl.textContent || '';
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp('(' + escaped + ')', 'gi');
+  titleEl.innerHTML = text.replace(regex, '<mark class="highlight">$1</mark>');
+}
 
-    // Hide/show year markers when all cards in section hidden
-    document.querySelectorAll('.tl-year').forEach(yearEl => {
-      const content = yearEl.nextElementSibling.nextElementSibling;
-      const cards = content.querySelectorAll('.work-card');
-      const anyVisible = Array.from(cards).s
+function clearHighlights() {
+  document.querySelectorAll('.work-title').forEach(el => {
+    if (el.querySelector('mark')) {
+      el.textContent = el.textContent;
+    }
+  });
+}
+
+function updateYearVisibility() {
+  document.querySelectorAll('.tl-year').forEach(yearEl => {
+    const lineEl = yearEl.nextElementSibling;
+    const contentEl = lineEl ? lineEl.nextElementSibling : null;
+    if (!contentEl) return;
+    const cards = contentEl.querySelectorAll('.work-card');
+    const anyVisible = Array.from(cards).some(c => !c.classList.contains('hidden'));
+    yearEl.style.opacity = anyVisible ? '1' : '0.2';
+    if (lineEl) lineEl.style.opacity = anyVisible ? '1' : '0.2';
+  });
+}
+
+function checkNoResults() {
+  const anyVisible = Array.from(document.querySelectorAll('.work-card')).some(c => !c.classList.contains('hidden'));
+  const msg = document.getElementById('no-results');
+  if (msg) msg.classList.toggle('visible', !anyVisible);
+}
+</script>
+</body>
+</html>
