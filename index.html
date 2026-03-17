@@ -495,21 +495,14 @@
     font-size: 0.88rem;
     color: var(--text);
     line-height: 1.65;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, margin 0.3s ease, padding 0.3s ease;
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 1px solid transparent;
-  }
-  .work-card.expanded .work-abstract {
-    max-height: 2000px;
-    opacity: 1;
+    display: none;
     margin-top: 0.75rem;
     padding-top: 0.75rem;
-    border-top-color: var(--stone);
-    animation: slideDown 0.4s ease;
+    border-top: 1px solid var(--stone);
+  }
+  .work-card.expanded .work-abstract {
+    display: block;
+    animation: fadeUp 0.35s ease;
   }
 
   /* ── READING TIME BADGE ── */
@@ -692,8 +685,8 @@
     <nav>
       <a href="#timeline" id="nav-timeline" class="active">Timeline</a>
       <a href="#timeline" onclick="filterWorks('all', null); document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); document.querySelector('[data-theme=all]').classList.add('active'); return false;">All Works</a>
-      <a href="#timeline" onclick="window.open('https://www.qu.edu.qa','_blank'); return false;">Qatar University</a>
-      <a href="mailto:m.amara@qu.edu.qa">Contact</a>
+      
+      <a href="/cdn-cgi/l/email-protection#c7aae9a6aaa6b5a687b6b2e9a2a3b2e9b6a6">Contact</a>
     </nav>
   </div>
 </header>
@@ -800,6 +793,7 @@
           <div class="pub-year-overlay">2004</div>
           <div class="pub-type-overlay">Soccer &amp; Society · Routledge</div>
         </div>
+        <div class="work-type">Journal Article · co-authored with Ian P. Henry</div>
         <div class="work-title">Between Globalization and Local 'Modernity': The Diffusion and Modernization of Football in Algeria</div>
         <div class="work-venue"><em>Soccer &amp; Society</em>, Vol. 5, No. 1 (2004), pp. 1–26 · Routledge / Taylor &amp; Francis</div>
         <div class="work-tags">
@@ -856,6 +850,9 @@
           <div class="pub-type-overlay">Sage · Sport and Society Textbook</div>
         </div>
         <div class="work-venue">In Houlihan (ed.), <em>Sport and Society: A Student Introduction</em> (2nd ed.), Sage · pp. 532–552</div>
+        <div class="work-type">Book Chapter</div>
+        <div class="work-title">An Introduction to the Study of Sport in the Muslim World</div>
+        <div class="work-venue">In Houlihan (ed.), <em>Sport and Society: A Student Introduction</em> (2nd ed.), Sage &middot; pp. 532&ndash;552</div>
         <div class="work-tags">
           <span class="work-tag">#Islam</span><span class="work-tag">#Muslim-world</span>
           <span class="work-tag">#comparative</span><span class="work-tag">#Shari'a</span><span class="work-tag">#Ijtihad</span>
@@ -899,6 +896,9 @@
           <div class="pub-type-overlay">Brown Journal of World Affairs</div>
         </div>
         <div class="work-venue"><em>Brown Journal of World Affairs</em>, Vol. XIV, Issue 2, pp. 67–75 (Spring/Summer 2008)</div>
+        <div class="work-type">Journal Article</div>
+        <div class="work-title">The Muslim World in the Global Sporting Arena</div>
+        <div class="work-venue"><em>Brown Journal of World Affairs</em>, Vol. XIV, Issue 2, pp. 67&ndash;75 (Spring/Summer 2008)</div>
         <div class="work-tags">
           <span class="work-tag">#Muslim-world</span><span class="work-tag">#postcolonialism</span>
           <span class="work-tag">#GANEFO</span><span class="work-tag">#Islamic-Games</span><span class="work-tag">#gender</span>
@@ -939,6 +939,9 @@
           <div class="pub-type-overlay">Int. Journal of the History of Sport · Routledge</div>
         </div>
         <div class="work-venue"><em>International Journal of the History of Sport</em>, Vol. 29, No. 4, pp. 638–651 · DOI: 10.1080/09523367.2012.658194</div>
+        <div class="work-type">Journal Article &middot; Peer-Reviewed</div>
+        <div class="work-title">Veiled Women Athletes in the 2008 Beijing Olympics: Media Accounts</div>
+        <div class="work-venue"><em>International Journal of the History of Sport</em>, Vol. 29, No. 4, pp. 638&ndash;651 &middot; DOI: 10.1080/09523367.2012.658194</div>
         <div class="work-tags">
           <span class="work-tag">#Beijing2008</span><span class="work-tag">#hijab</span>
           <span class="work-tag">#gender</span><span class="work-tag">#Olympics</span>
@@ -985,6 +988,9 @@
           <div class="pub-type-overlay">Religions · MDPI · Open Access</div>
         </div>
         <div class="work-venue"><em>Religions</em> (MDPI), Vol. 4, No. 4, pp. 644–656 · Published 10 December 2013 · DOI: 10.3390/rel4040644</div>
+        <div class="work-type">Journal Article &middot; Open Access &middot; Peer-Reviewed</div>
+        <div class="work-title">Sport, Islam, and Muslims in Europe: In Between or on the Margin?</div>
+        <div class="work-venue"><em>Religions</em> (MDPI), Vol. 4, No. 4, pp. 644&ndash;656 &middot; Published 10 December 2013</div>
         <div class="work-tags">
           <span class="work-tag">#Islam</span><span class="work-tag">#Europe</span>
           <span class="work-tag">#France</span><span class="work-tag">#identity</span>
@@ -1031,6 +1037,9 @@
           <div class="pub-type-overlay">Palgrave Macmillan · Islam in the West</div>
         </div>
         <div class="work-venue">In Farrar, Robinson, Vallic &amp; Wetherly (eds.), <em>Islam in the West: Key Issues in Multiculturalism</em>, Palgrave Macmillan (2012), pp. 138–153</div>
+        <div class="work-type">Book Chapter (co-authored with Ian P. Henry)</div>
+        <div class="work-title">Deconstructing the Debate around Sport and the &lsquo;Question&rsquo; of &lsquo;Muslim Minorities&rsquo; in the West</div>
+        <div class="work-venue">In Farrar et al. (eds.), <em>Islam in the West: Key Issues in Multiculturalism</em>, Palgrave Macmillan (2012), pp. 138&ndash;153</div>
         <div class="work-tags">
           <span class="work-tag">#Muslim-minorities</span><span class="work-tag">#sport-welfare</span>
           <span class="work-tag">#UK</span><span class="work-tag">#multiculturalism</span>
@@ -1076,6 +1085,9 @@
           <div class="pub-type-overlay">Routledge · Sport in Islam</div>
         </div>
         <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016) · pp. [Chapter 7]</div>
+        <div class="work-type">Book Chapter</div>
+        <div class="work-title">Sport and Political Transition in Tunisia: Another Terrain of Competition Between Islamists and Seculars</div>
+        <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
         <div class="work-tags">
           <span class="work-tag">#Tunisia</span><span class="work-tag">#Arab-Spring</span>
           <span class="work-tag">#Ennahda</span><span class="work-tag">#London2012</span><span class="work-tag">#Islamism</span>
@@ -1128,6 +1140,9 @@
           <div class="pub-type-overlay">Routledge · Edited Volume</div>
         </div>
         <div class="work-venue">Routledge, London (2016) · Series: Routledge Research in Sport, Culture and Society, No. 50</div>
+        <div class="work-type">Edited Book &middot; Routledge</div>
+        <div class="work-title">Sport in Islam and in Muslim Communities (co-edited with Alberto Testa)</div>
+        <div class="work-venue">Routledge, London (2016) &middot; Series: Routledge Research in Sport, Culture and Society, No. 50</div>
         <div class="work-tags">
           <span class="work-tag">#edited-volume</span><span class="work-tag">#Islam</span>
           <span class="work-tag">#Muslim-communities</span><span class="work-tag">#comparative</span><span class="work-tag">#Routledge</span>
@@ -1168,6 +1183,9 @@
           <div class="pub-year-overlay">2016</div>
           <div class="pub-type-overlay">Routledge · Sport Marketing</div>
         </div>
+        <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
+        <div class="work-type">Book Chapter (co-authored with Guillaume Bodet)</div>
+        <div class="work-title">Islamic Sport Marketing or Sport Marketing in Muslim Countries and Communities</div>
         <div class="work-venue">In Testa &amp; Amara (eds.), <em>Sport in Islam and in Muslim Communities</em>, Routledge (2016)</div>
         <div class="work-tags">
           <span class="work-tag">#halal-marketing</span><span class="work-tag">#sport-marketing</span>
@@ -1215,6 +1233,9 @@
           <div class="pub-type-overlay">Qatar University · Football &amp; Faith</div>
         </div>
         <div class="work-venue">Mahfoud Amara &amp; Youcef Bouandel · Qatar University · 2022</div>
+        <div class="work-type">Article (co-auteur : Youcef Bouandel, Universit&eacute; du Qatar)</div>
+        <div class="work-title">La Coupe du monde 2022 de la FIFA, entre football et foi</div>
+        <div class="work-venue">Mahfoud Amara &amp; Youcef Bouandel &middot; Qatar University &middot; 2022</div>
         <div class="work-tags">
           <span class="work-tag">#Qatar2022</span><span class="work-tag">#Islam</span>
           <span class="work-tag">#football</span><span class="work-tag">#foi</span>
@@ -1248,7 +1269,7 @@
   </p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* VISITOR COUNTER */
 (function() {
   try {
@@ -1288,7 +1309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordCount = abstract ? abstract.innerText.trim().split(/\s+/).length : 0;
     const mins = Math.max(1, Math.round(wordCount / 200));
 
-    // Reading time badge
+    // Reading time badge on work-type
     const typeEl = card.querySelector('.work-type');
     if (typeEl) {
       const badge = document.createElement('span');
@@ -1297,12 +1318,12 @@ document.addEventListener('DOMContentLoaded', () => {
       typeEl.appendChild(badge);
     }
 
-    // Click hint
+    // Click hint below work-tags
     const tagsEl = card.querySelector('.work-tags');
     if (tagsEl) {
       const hint = document.createElement('div');
       hint.className = 'click-hint';
-      hint.textContent = 'Click to read summary';
+      hint.textContent = 'Click to read summary & significance';
       tagsEl.after(hint);
     }
 
@@ -1451,10 +1472,4 @@ function updateYearVisibility() {
     if (!contentEl) return;
     const cards = contentEl.querySelectorAll('.work-card');
     const anyVisible = Array.from(cards).some(c => !c.classList.contains('hidden'));
-    yearEl.style.opacity = anyVisible ? '1' : '0.2';
-    if (lineEl) lineEl.style.opacity = anyVisible ? '1' : '0.2';
-  });
-}
-
-function checkNoResults() {
-  const anyVisi
+    yearEl.style.opaci
